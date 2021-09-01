@@ -1,0 +1,331 @@
+%\documentclass[12pt]{amsart}
+\documentclass[12pt,oneside,reqno]{amsart}
+\usepackage{amsmath}
+\usepackage[margin=1in]{geometry}
+\usepackage{tkz-euclide}
+\usepackage[cmtip,all]{xy}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{mathrsfs}
+\usepackage{amssymb}
+\usepackage{mathtools}
+\usepackage{stackengine}
+\usepackage{url}
+\usepackage{pxfonts}
+\usepackage{pgfplots}
+\usepackage{graphicx}
+\pgfplotsset{compat=1.8}
+\usepackage{url}
+\usepackage{tikz-cd}
+\parskip=15pt
+\parindent=0pt
+
+
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{cor}[theorem]{Corollary}
+\newtheorem{rmk}[theorem]{Remark}
+\newtheorem{prop}[theorem]{Proposition}
+\theoremstyle{definition}
+\newtheorem{defn}[theorem]{Definition}
+\newtheorem{eg}[theorem]{Example}
+\newtheorem{ex}[theorem]{Exercise}
+\newtheorem{fact}[theorem]{Fact}
+\newtheorem{ob}[theorem]{Observation}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{question}[theorem]{Question}
+\newtheorem{obs}[theorem]{Observation}
+\newtheorem{aside}[theorem]{Aside}
+
+
+
+\pgfplotsset{soldot/.style={color=blue,only marks,mark=*}} \pgfplotsset{holdot/.style={color=blue,fill=white,only marks,mark=*}}
+\newcommand*\diff{\mathop{}\!\mathrm{d}}
+\newcommand*\Diff[1]{\mathop{}\!\mathrm{d^#1}}
+\newcommand\barbelow[1]{\stackunder[1.2pt]{$#1$}{\rule{.8ex}{.075ex}}}
+
+
+\begin{document}
+\title[Elliptic singularities]{Hilbert scheme of points on simple elliptic singularities}
+
+%\author{}
+
+\maketitle
+\date{\today}
+
+\section{}
+Let $X$ be the affine cone over a smooth plane cubic curve and $d$ be a positive integer. Denote $\mathrm{Hilb}^d(X)$ the Hilbert scheme of length $d$ subschemes of $X$. If $Z$ is a length $d$ subschemes, denote by $[Z]$ the closed point of $\mathrm{Hilb}^d(X)$ which represent $Z$ and $I_Z$ the ideal sheaf on $X$ defining $Z$. The Zariski tangent space of $\mathrm{Hilb}^d(X)$ at $[Z]$ is $\mathrm{Hom}(I_Z, \mathcal{O}_Z)$, and the dimension of any component of $\mathrm{Hilb}^d(X)$ that contains $[Z]$ is at least $\dim \mathrm{Hom}_X(I_Z, \mathcal{O}_Z) - \dim \mathrm{Ext}^1_X(I_Z, \mathcal{O}_Z)$. 
+
+The minimal $\mathcal{O}_X$-free resolution of $I_Z$, if not finite, is eventually 2-periodic: 
+\[
+\dots \to \mathcal{O}_X^{\oplus \beta_3} \xrightarrow{d_3} \mathcal{O}_X^{\oplus \beta_2} \xrightarrow{d_2} \mathcal{O}_X^{\oplus \beta_1} \xrightarrow{d_1} \mathcal{O}_X^{\oplus \beta_0} \to I_Z \to 0.
+\]
+Denote $M_Z \coloneqq \mathrm{coker} \,d_2$, hence $0 \to M_Z \to \mathcal{O}_X^{\oplus \beta_0} \to I_Z \to 0$ is exact. Applying $\mathrm{Hom}_X(\bullet, \mathcal{O}_Z)$ to this short exact sequence, we obtain a four-term exact sequence:
+\begin{equation}\label{fourterm}
+0 \to \mathrm{Hom}_X(I_Z, \mathcal{O}_Z) \to \mathrm{Hom}_X(\mathcal{O}_X^{\oplus \beta_0}, \mathcal{O}_Z)  \to \mathrm{Hom}_X(M_Z, \mathcal{O}_Z)  \to \mathrm{Ext}^1_X(I_Z, \mathcal{O}_Z) \to 0.
+\end{equation}
+Here $\mathrm{Hom}_X(\mathcal{O}_X^{\oplus \beta_0}, \mathcal{O}_Z) \cong \mathcal{O}_Z^{\oplus \beta_0}$, and $\mathrm{Hom}_X(M_Z, \mathcal{O}_Z)$ is a finitely generated $\mathcal{O}_Z$-module. 
+
+We are looking for a subscheme $Z$ of $X$ such that $\dim \mathrm{Hom}_X(I_Z, \mathcal{O}_Z) - \dim \mathrm{Ext}^1_X(I_Z, \mathcal{O}_Z) > 2d$. In light of the  sequence (\ref{fourterm}), it suffices to show $\beta_0d - \dim \mathrm{Hom}_X(M_Z, \mathcal{O}_Z) > 2d$, i.e., $\dim \mathrm{Hom}_X(M_Z, \mathcal{O}_Z) < (\beta_0 - 2)d$. Note that $M_Z$ is a maximal Cohen-Macaulay $\mathcal{O}_X$-module, in particular, torsion-free. 
+
+Suppose there is no free summand in $M_Z$. Then $\dots \to \mathcal{O}_X^{\oplus \beta_3} \xrightarrow{d_3} \mathcal{O}_X^{\oplus \beta_2} \xrightarrow{d_2} \mathcal{O}_X^{\oplus \beta_1} \to M_Z \to 0$ is a 2-periodic $\mathcal{O}_X$-free resolution of $M_Z$. In particular, $\beta_1 = \beta_2 = \dots$. Note that $X$ has an isolated hypersurface singularity, hence the matrices $d_i$ are obtained from a matrix factorization. Since $X$ is a cubic hypersurface, all of the entries of the matrices $d_i$ are at most quadratic. It also follows that $\beta_1 \leq 3(\beta_0 - 1) = 3 \mathrm{rank}\, M_Z$. If $\beta_1 = 3(\beta_0 - 1)$, in fact all of the entries of $d_2$ are linear, and $M_Z$ is a Ulrich $\mathcal{O}_X$-module. 
+
+Applying $\mathrm{Hom}_X(\bullet, \mathcal{O}_Z)$ to the free resolution of $M_Z$:
+\[
+0 \to \mathrm{Hom}_X(M_Z, \mathcal{O}_Z)  \to \mathcal{O}_Z^{\oplus \beta_1} \xrightarrow{\bar{d_2}}  \mathcal{O}_Z^{\oplus \beta_2}  \xrightarrow{\bar{d_3}} \mathcal{O}_Z^{\oplus \beta_3} \to \dots.
+\]
+It follows that $\dim \mathrm{Hom}_X(M_Z, \mathcal{O}_Z) < (\beta_0 - 2)d$ if $\mathrm{rank} \, \bar{d_2} > (\beta_1 - \beta_0 + 2)d$. Since $\beta_1 \leq 3(\beta_0 - 1)$, $\beta_1 - \beta_0 + 2 \leq \frac{2}{3}\beta_1 + 1$. Hence, it suffices to find a scheme $Z$ such that $\mathrm{rank} \, \bar{d_2} > (\frac{2}{3}\beta_1 + 1)d$. This in turn will follow if all of the ideals generated by the column vectors of $\bar{d_2}$ have colength $< (\frac{1}{3} - \frac{1}{\beta_1})d$.
+
+To minimize the colength of the ideals generated by the column vectors of $\bar{d_2}$, it would be more optimal if the number of quadratic entries of $\bar{d_2}$ is minimal, i.e., if $M_Z$ is maximally generated. 
+
+\section{}
+A natural continuation of studying the Hilbert schemes of points on surfaces with normal isolated singularities after rational double points is to investigate those hypersurfaces of degree three and four. If the degree is at least five, then the Hilbert scheme becomes eventually reducible. Surface singularities defined by a cubic equation are affine cones over elliptic curves, which constitute a class of simple elliptic singularities.
+
+Let $E$ be an elliptic curve, and $e \in E$ be a closed point of $E$. The linear system $\vert \mathcal{O}_E(3e) \vert$ gives an embedding $E \hookrightarrow \mathbb{P}^2$ as a plane cubic curve. Let $X = C(E)$ be the affine cone over $E$, that is, $X = \mathrm{Spec}(\bigoplus_n H^0(E, \mathcal{O}_E(n)))$. We denote the vertex of $X$ by $p$, and the complete local ring by $R = \hat{\mathcal{O}}_{X, p}$. We denote the punctual Hilbert scheme of $X$ of length $d$ supported at $p$ by $H_d$. Let $\pi: \tilde{X} \to X$ be the blowup of $X$ at $p$, i.e., $\tilde{X} = \mathrm{Spec}(\bigoplus_n \mathcal{O}_E(n))$. Let $E_p = \pi^{-1}(p) \cong E$ be the exceptional curve. The goal is to construct a non-smoothable component of $H_d$. Then it is sufficient to find a component of dimension different from $2d$. Cones over elliptic curves have isolated simple elliptic singularities, which are, in particular, minimal elliptic singularities. 
+
+\section{}
+\subsection{Iarrobino's method}
+In proving the reducibility of the Hilbert schemes $\mathrm{Hilb}^d(\mathbb{A}^n)$ for $n \geq 3$ and $d \gg 0$, Iarrobino observed the existence of families of length $d$ subschemes of $\mathbb{A}^n$ defined by certain homogeneous forms whose dimensions are greater than the expected dimensions of the corresponding Hilbert schemes. For example, there is a component of $\mathrm{Hilb}^{102}(\mathbb{A}^3)$ of dimension at least $324 > 3 \cdot 102$, hence $\mathrm{Hilb}^{102}(\mathbb{A}^3)$ is reducible. This follows essentially from the growth of the Hilbert function of the polynomial rings. 
+
+The same method applies to show that $\mathrm{Hilb}^{d}(X)$ is eventually reducible if $X$ is a cone singularity over a smooth curve of degree at least 5. 
+
+\subsection{Non-homogeneous schemes}
+For surface cone singularities of lower degrees, it is not sufficient to further look for non-smoothable components of the Hilbert schemes by only considering homogeneous schemes. 
+
+\begin{eg}
+Denote by $S = \mathbb{C}[x, y, z]$ the polynomial ring with maximal ideal $\mathfrak{m} = (x, y, z)$, and by $S_k$ the vector space of degree $k$ forms. Let $V$ be a three-dimensional subspace of $S_3$. Denote the complement of $V \otimes S_1$ in $S_4$ by $N$. If $V$ is general, then $V \otimes S_1$ is a subspace of $S_4$ of dimension 9. Let $G_0$ be the locus in $\mathrm{Gr}(3, S_3)$ parametrizing three-dimensional subspaces of cubic forms which span a nine-dimensional subspace of quartic forms. By semicontinuity, $G_0$ is open in $\mathrm{Gr}(3, S_3)$. Let $v_1, v_2, v_3$ be a basis of $V$ and $C_1, \dots, C_7$ be a basis of the complement of $V$ in $S_3$. For any three-dimensional subspace $N_1$ of $N$, let $Q_1, Q_2, Q_3$ be its basis. Consider the ideal $I$ generated by $f_l, g_m$ for $l, m = 1, 2, 3$ and $\mathfrak{m}^5$, where 
+\begin{align*}
+f_l & = v_l + \sum_{i = 1}^7a_{il}C_i + \sum_{j = 1}^3b_{jl}Q_j \\
+g_m & = q_m + \sum_{j = 1}^3d_{jm}Q_j 
+\end{align*} 
+and $q_1, q_2, q_3$ is a basis of the complement of $N_1$ in $N$, $a_{il}, b_{jl}$, and $d_{jm}$ are constants.
+
+The colength of $I$ is $20$, so it defines a closed point of $\mathrm{Hilb}^{20}(\mathbb{A}^3)$. Since $V$ is general there is no linear syzygy among $f_1, f_2$ and $f_3$. The $39$ coefficients $a_{il}, b_{jl}, d_{jm}$ are independent. So ideals of this form give rise to a $39$-dimensional family. 
+\end{eg}
+
+\begin{eg}
+Instead, we can look at ideals given by forms in $S_{7}$ and $S_8$. Note that $\dim S_7 = 36$ and $\dim S_8 = 45$. Let $V$ be a 12-dimensional subspace of $S_7$. If $V$ is general, then $V \otimes S_1$ is a subspace of $S_8$ of dimension $36$. The complement of $V \otimes S_1$ in $S_8$, denoted by $N$, is $9$-dimensional. For any $5$-dimensional subspace $N_1$ of $N$ we obtain an ideal of $S$ of colength $\sum_{i = 0}^6 \dim S_i + 24 + \dim N_1 = 113$. On the other hand, there are $368$ free coefficients, and length $113$ subschemes defined by ideals of such a form constitute a family of of dimension $368 > 3 \cdot 113$.
+\end{eg}
+
+However, examples of this form cannot give rise to components of the Hilbert schemes on the cone over a cubic or a quartic curve with dimension greater than the expected dimension. 
+
+\subsection{The Zariski tangent space at a non-homogeneous ideal}
+At a closed point $[Z]$ of the Hilbert scheme with ideal $I_Z$, the Zariski tangent space to the Hilbert scheme is identified as $\mathrm{Hom}(I_Z, \mathcal{O}_Z)$. Haiman proved the smoothness of the Hilbert scheme of points on a smooth surface by finding an explicit vector space basis of the Zariski tangent space to the Hilbert scheme. 
+
+\section{}
+\subsection{Vector bundles over an elliptic curve}
+We may specify the embedding of $E$ only for the convenience of calculation. Up to $\mathrm{SL}(3, \mathbb{C})$-action, $E \cong \mathrm{Proj}(\mathbb{C}[x, y, z] / (F))$ where $F = x^3 + y^3 + z^3 - 3\mu xyz$ for some $\mu \in \mathbb{C}$ and $\mu^3 \neq 1$. Then $X \cong \mathrm{Spec}(\mathbb{C}[ x, y, z] / (F))$, and $R = \mathbb{C}\llbracket x, y, z\rrbracket / (F)$. 
+
+We denote by $\mathcal{E}(r, d)$ the set of isomorphism classes of indecomposable rank $r$ degree $d$ algebraic vector bundles over $E$. In particular, $\mathcal{E}(1, 0) \cong \mathrm{Pic}^0(E)$. Fixing a line bundle $L_d$ of degree $d$, any line bundle of degree $d$ is isomorphic to $L_d(\lambda) \coloneqq L_d \otimes \lambda$ for some $\lambda \in \mathrm{Pic}^0(E)$. There is a bijection between $\mathcal{E}(r, d)$ and $\mathcal{E}(1, d)$ for any $(r, d) \in \mathbb{N} \times \mathbb{Z}$ via taking determinant: for any line bundle $L_d(\lambda) \in \mathrm{Pic}^d(E)$ of degree $d$ there is a unique vector bundle $W_{r}(d, \lambda) \in \mathcal{E}(r, d)$ with $\det W_{r}(d, \lambda) = \wedge^d W_{r}(d, \lambda) \cong L_d(\lambda)$. 
+
+\begin{prop}
+\begin{itemize}
+\item[(1)] There is a unique vector bundle $F_r \in \mathcal{E}(r, 0)$ with $H^0(E, F_r) \neq 0$. Moreover, there is an exact sequence
+\[
+0 \to \mathcal{O}_E \to F_{r + 1} \to F_{r} \to 0.
+\]
+\item[(2)] Any bundle $M$ of rank $r$ degree $0$ is of the form $M \cong F_r \otimes \det M$. 
+\end{itemize}
+\end{prop}
+
+We call $F_r$ the \textit{Atiyah bundle} of rank $r$.
+
+\begin{prop}
+Let $M \in \mathcal{E}(r, d)$, $d \geq 0$. 
+\begin{itemize}
+\item[(1)] $\dim H^0(E, M) = \begin{cases} d & \textrm{ if } d > 0 \\ 0 \textrm{ or } 1 & \textrm{ if } d = 0. \end{cases}$
+\item[(2)] The bundle $M$ is stable if and only if $r$ and $d$ are coprime. Any stable bundle is indecomposable. 
+\item[(3)] $M$ is semi-stable if and only if $M \cong F_h \otimes M_1$ for a bundle $M_1$ with $\mu(M) = \mu(M_1)$ and $\det M = (\det M_1)^h$ where $h = \mathrm{gcd}(r, d)$.
+\item[(4)] Any semi-stable bundle is the direct sum of indecomposable semi-stable bundles of the same slope. 
+\end{itemize}
+\end{prop}
+
+A vector bundle over $E$ in general decomposes as $\bigoplus_{i = 1}^{m} \bigoplus_{j = 1}^{t(i)}F_{i_j} \otimes W_{r_i}(d_i, \lambda_{i_j})$ with $(r_i, d_i) \in \mathbb{N} \times \mathbb{Z}, \mathrm{gcd}(r_i, d_i) = 1$, and $F_{i_j}$ are the Atiyah bundles of rank $i_j$ for some not necessarily distinct natural numbers $i_1, \dots, i_{t(i)}$ for $i = 1, \dots, m$. 
+
+\begin{prop}Let $W$ and $W'$ be stable bundles with $\mu (W) = \mu (W')$. 
+\begin{itemize}
+\item[(1)] $\mathrm{Hom}(F_r, F_r) = \mathbb{C}[T]/(T^r)$, with $t \in \mathbb{C}$ acting as $t \cdot \mathrm{Id}$, and a choice of $T$ is given by choosing a surjection $F_r \to F_{r - 1}$, followed by an inclusion of $F_{r - 1}$ in $F_r$. In particular, $Hom(F_r, F_r)$ is an abelian $ \mathbb{C}$-algebra of dimension $r$.
+\item[(2)] Let $F$ and $F'$ be direct sums of Atiyah bundles. Then the map $\phi \mapsto \phi \otimes \mathrm{Id}$ is an isomorphism $\mathrm{Hom}(F, F') \to \mathrm{Hom}(F \otimes W, F' \otimes W)$. In particular, $\mathrm{Hom}(F_r \otimes W, F_r \otimes W) \cong \mathbb{C}[T]/(T^r)$.
+\item[(3)] $\mathrm{Hom}(F_r \otimes W, F_r \otimes W') \cong \begin{cases} \mathbb{C}[T]/(T^r) & \textrm{ if } W \cong W' \\ 0 & \textrm{ otherwise. } \end{cases}$
+\end{itemize}
+\end{prop}
+
+\subsection{Reflexive modules on $X$}
+An $R$-module is reflexive if and only if it is maximal Cohen-Macaulay. For any reflexive $R$-module $M$, we denote by $R_E(M) \coloneqq \pi^{*}(M)^{**} \otimes \mathcal{O}_{E_p}$. Then $R_E(\bullet)$ is a functor from the category of finitely generated reflexive $R$-modules to the category of vector bundles on the exceptional elliptic curve $E_p$.
+
+\begin{theorem}
+There is a bijective correspondence, induced by the functor $R_E$, between the set of isomorphism classes of non-projective reflexive $R$-modules and that of isomorphism classes of vector bundles over $E$ of the form $\mathcal{O}_E^{\oplus n} \oplus G$ such that 
+\begin{itemize}
+\item[(i)] $G$ is indecomposable and globally generated;
+\item[(ii)] $H^1(E, G) = 0$;
+\item[(iii)] $H^0(E, G(E)) = n$.
+\end{itemize}
+\end{theorem}
+
+The punctual Hilbert scheme $H_d$ is isomorphic to the scheme of length $d$ quotients of $R$, the complete local ring of the vertex of the cone. If $\mathcal{O}_Z$ is such a quotient, then the kernel $R \to \mathcal{O}_Z$ is an $\mathfrak{m}$-primary ideal of colength $d$, denoted by $I_Z$. Choose a minimal generating set of $I_Z$, we denote the module of relations by $M_Z$ with the following exact sequence of $R$-modules.
+\[
+0 \to M_Z \to R^{\oplus r + 1} \to I_Z \to 0
+\]
+for some $r > 0$. Then $M_Z$ is reflexive. 
+
+It is well-known that the completion functor preserves indecomposability and almost split sequences for MCM modules over rational double point singularities. 
+
+Using Atiyah's classification of vector bundles over $E$, Kahn classified isomorphism classes of indecomposable reflexive $R$-modules.
+
+\begin{prop}
+Any indecomposable reflexive $\hat{\mathcal{O}}_{X, p}$-module up to isomorphism is of the form $M_{r, d}(\lambda)$ for some $\lambda \in \mathrm{Pic}^0(E)$ and for some integers $r$ and $d$ such that $r \leq d < 3r + 3$. The module $M_{r, d}(\lambda)$ has rank $r$, and $R_E(M_{r, d}(\lambda)) \cong F_{r, d}(\lambda)$ where
+\[
+F_{r, d}(\lambda) = \begin{cases} F_{m} \otimes W_k(a, \lambda) & \textrm{ if } d < 3r \textrm{ or } d = 3r \textrm{ and } \lambda \neq \lambda_0 \\
+\mathcal{O}_E \oplus F_{r - 1} \otimes W_{1}(3, \lambda_0) & \textrm{ if } d = 3r \textrm{ and } \lambda = \lambda_0 \\
+\mathcal{O}_E^{\oplus n} \oplus F_l \otimes W_{s}(t, \lambda) & \textrm{ if } d = 3r + n
+ \textrm{ wth } 0 < n < 3 \end{cases}
+\]
+where $W_1(0, \lambda_0) = L_1(\lambda_0) \cong \mathcal{O}_E$, $m = \mathrm{gcd}(d, r), k = r/m, a = d/m$ if $d < 3r$; and $l = \mathrm{gcd}(r - n, 3r - 2n), s = (r - n)/l, t = (3r - 2n)/l$ if $d = 3r + n$ with $0 < n < 3$. Moreover, the functor $R_E$ is compatible with taking determinant. 
+\end{prop}
+
+\begin{rmk}
+By the preceding proposition it follows that if $M_{r, d}(\lambda)$ is the completion of a graded $\mathcal{O}_{X, p}$-module, then $F_{r, d}(\lambda)$ is the sheafification of $M_{r, d}(\lambda)$. In general, $R_E(M_{r, d}(\lambda))$ is not necessarily indecomposable, and $\Gamma_*(F_{r, d}(\lambda))$ need not recover $M_{r, d}(\lambda)$. If $d > 3r$, then $l = 1$ if $n = 1$ or $r$ is odd; and $l = 2$ if $n = 2$ and $r$ is even.
+\end{rmk}
+
+\begin{prop}[The local Picard group] 
+Let $(X, p)$ be the cone over the elliptic curve $E$, then the local Picard group of $X$ at $p$ is isomorphic to $\mathrm{Pic}(E)/[\mathcal{O}_E(1)]$, where $[\mathcal{O}_E(1)]$ is the class representing the very ample divisor of a hyperplane section of the curve embedded on $\mathbb{P}^2$. 
+\end{prop}
+
+\begin{rmk}
+Since $\deg \mathcal{O}_E(1) = 3$ the local Picard group of $(X, p)$ can be identified with $\mathrm{Pic}^0(E) \oplus \mathrm{Pic}^1(E) \oplus \mathrm{Pic}^2(E)$. 
+\end{rmk}
+
+From the preceding proposition it follows that 
+
+\begin{prop}
+Suppose $M_{r, d}(\lambda)$ is any reflexive $\hat{\mathcal{O}}_{X, p}$-module. Then there is a connected flat family of reflexive $\hat{\mathcal{O}}_{X, p}$-modules in which $M_{r, d}(\lambda)$ is a special member whereas a general member is of the form $\hat{\mathcal{O}}_{X, p}^{\oplus r - 1} \otimes \det \, M_{r, d}(\lambda)$.
+\end{prop}
+
+Deformations of reflexive modules induce deformations of zero-dimensional subschemes. 
+
+1. Family of graded modules --> homogeneous Hilbert scheme.
+2. Families of non-homogeneous modules.
+3. Calculating the length of schemes with non-homogeneous modules.
+4. Idea: start with any ideal, find the colength of the associated homogeneous ideal from a minimal presentation.
+5. Study deformations of modules using their matrix factorizations. 
+
+\begin{prop}
+
+\end{prop}
+
+
+
+
+
+
+
+Suppose $F_Z$ and $E_Z$ are vector bundles over $E$ that satisfy the following conditions ($\sharp$): 
+\begin{itemize}
+\item[(i)] $\deg F_Z = \deg E_Z$;
+\item[(ii)] $\mathrm{rank} \, E_Z = \mathrm{rank} \, F_Z + 1$;
+\item[(iii)] $\det F_Z = \det E_Z$.
+\end{itemize}
+
+For a given vector bundle $M$ over $E$, we say that a bundle $N$ satisfies the conditions $(\sharp)$ with respect to $M$ if $M$ and $N$ satisfy conditions $(\sharp)$ with $\mathrm{rank} \, M = \mathrm{rank} \, N + 1$. 
+
+As direct sums of indecomposable bundles, suppose $F_Z = \bigoplus_{i = 1}^{m} \bigoplus_{j = 1}^{t(i)}F_{i_j} \otimes W_{r_i}(d_i, \lambda_{i_j})$, and $E_Z = \bigoplus_{l = 1}^{n} \bigoplus_{k = 1}^{q(l)}F_{l_k} \otimes W_{s_l}(e_l, \mu_{l_k})$ for some $\lambda_{i_j}, \mu_{l_k} \in \mathrm{Pic}^0(E)$ for $i_j, l_k \in \mathbb{N}, j = 1, \dots, t(i), k = 1, \dots, q(l)$, and $\mathrm{gcd}(r_i, d_i) = \mathrm{gcd}(s_j, e_j) = 1$ for $i = 1, \dots, m$ and $l = 1, \dots, n$. Then conditions $(\sharp)$ become
+\begin{itemize}
+\item[(i)] $\deg F_Z = \sum_{i = 1}^m d_i(\sum_{j = 1}^{t(i)} i_j) = \deg E_Z = \sum_{l = 1}^n e_l(\sum_{k = 1}^{q(l)} l_k)$;
+\item[(ii)] $\mathrm{rank} \, F_Z + 1 = \sum_{i = 1}^mr_i (\sum_{j = 1}^{t(i)} i_j) + 1 = \mathrm{rank} \, E_Z = \sum_{l = 1}^ns_l (\sum_{k = 1}^{q(l)} l_k)$;
+\item[(iii)] $\det F_Z = \sum_{i = 1}^m \sum_{j = 1}^{t(i)}i_j\lambda_{i_j} = \det E_Z = \sum_{l = 1}^n \sum_{k = 1}^{q(l)}l_k\mu_{l_k} $.
+\end{itemize}
+
+\begin{prop} 
+Suppose $F_Z = \bigoplus_{i = 1}^{m} \bigoplus_{j = 1}^{t(i)}F_{i_j} \otimes W_{r_i}(d_i, \lambda_{i_j})$, and $E_Z = \bigoplus_{l = 1}^{n} \bigoplus_{k = 1}^{q(l)}F_{l_k} \otimes W_{s_l}(e_l, \mu_{l_k})$ for some $\lambda_{i_j}, \mu_{l_k} \in \mathrm{Pic}^0(E)$ for $i_j, l_k \in \mathbb{N}, j = 1, \dots, t(i), k = 1, \dots, q(l)$, and $\mathrm{gcd}(r_i, d_i) = \mathrm{gcd}(s_j, e_j) = 1$ for $i = 1, \dots, m$ and $l = 1, \dots, n$ which satisfy conditions $(\sharp)$. Suppose the direct summands of $E_Z$ and $F_Z$ are indexed in slope-ascending order: $\frac{e_1}{s_1} < \frac{e_2}{s_2} < \dots < \frac{e_n}{s_n}$, and $\frac{d_1}{r_1} < \frac{d_2}{r_2} < \dots < \frac{d_m}{r_m}$. 
+\begin{itemize}
+\item[(1)]
+If there is a vector bundle epimorphism $\Phi: E_Z^* \to F_Z^*$. Then the cokernel of $\Gamma_*(\Phi^*): \Gamma_*(F_Z) \to \Gamma_*(E_Z)$ is the ideal of a zero-dimensional subscheme $Z$ of $X$ supported at $p$. 
+\item[(2)]
+The length of $Z$ is $d = \sum_{t \geq 0} (h^1(F_Z(t)) - h^1(E_Z(t))) = \sum_{t \geq 0}[\sum_{l = 1}^{n}(e_l + 3ts_l)_-(\sum_{k = 1}^{q(l)}l_k) - \sum_{i = 1}^{m}(d_i + 3tr_i)_-(\sum_{j = 1}^{t(i)}i_j)]$, where for any integer $n$, $(n)_- = n$ if $n < 0$, or $0$ otherwise. 
+\item[(3)]
+We denote by $n_i = \sum_{k = 1}^{q(i)}i_k$ and $m_i = \sum_{j = 1}^{t(i)}i_j$. Suppose for any $l = 1, \dots, n$ and $i = 1, \dots, m$ if $s_1n_1 + \dots + s_ln_l < r_1m_1 + \dots + r_im_i \leq s_1n_1 + \dots + s_{l + 1}n_{l + 1}$ then $d_1m_1 + \dots + d_im_i < e_1n_1 + \dots + e_ln_l + e_{l + 1}n_{l + 1}$. Then there is a vector bundle epimorphism $\Phi: E_Z^* \to F_Z^*$.
+\end{itemize}
+\end{prop} 
+
+\subsection{Hilbert scheme of points on the affine cone}
+
+It is in general very difficult to detect smoothability of subschemes on a singular surface or a non-singular higher dimensional variety. To attack the problem of reducibility of the Hilbert schemes, the most effective method has been constructing components of the Hilbert scheme of unexpected dimensions. In the case of singular surfaces with isolated singularities, the extra components, if exist, parametrize subschemes that are supported entirely at the singularities. The local geometry of the punctual Hilbert schemes of the surface at the singularities is well reflected by the presentations of the ideals of the subschemes. 
+
+Let $[Z] \in H_d$ correspond to a length $d$ subscheme $Z$ of $X$ supported at $p$ with ideal $I_Z$. Suppose $0 \to \Gamma_*(F_Z) \to \Gamma_*(E_Z) \to I_Z \to 0$ and $0 \to \Gamma_*(F_Z') \to \Gamma_*(E_Z') \to I_Z \to 0$ are two short exact sequences with $E_Z, E_Z', F_Z$ and $F_Z'$ vector bundles over the elliptic curve $E$. 
+
+ 
+
+
+
+
+
+\begin{lemma}
+Suppose $E_Z$ is a vector bundle over $E$ of rank $r \geq 2$ and degree $a$. For a finite sequence of positive integers $m_1, \dots, m_k$, we denote by $P(m_1, \dots, m_k)$ the set of partitions of $m_1, \dots, m_k$, and by $l(m_1, \dots, m_k)$ its total length. Then the set of bundles over $E$ up to isomorphism that satisfy conditions $(\sharp)$ with respect to $E_Z$ can be identified with the set of closed points of 
+\[
+\bigcup_{d_i, r_i, m_i, k} (\mathrm{Pic}^0(E))^{N(d_i, r_i; m_1, \dots, m_k)}
+\]
+where $N(d_i, r_i; m_1, \dots, m_k) = l(m_1, \dots, m_k) - \epsilon(m_1, \dots, m_k)$, where $\epsilon(m_1, \dots, m_k)$ is the minimum of all of the parts in the partitions of $m_1, \dots, m_k$, and the union is taken over $k$-tuples of positive integers $(m_1, \dots, m_k), (d_1, \dots, d_k)$, and $(r_1, \dots, r_k)$ for some $k$ which satisfy the equations $\sum_{i = 1}^k d_i m_i = a$ and $\sum_{i = 1}^k r_i m_i = r - 1$. In particular, $\max_{d_i, r_i, m_i, k} N(d_i, r_i; m_1, \dots, m_k) = \max_{d_i, r_i, k} \sum_{i = 1}^k m_i - \epsilon(m_1, \dots, m_k)$.
+\end{lemma}
+
+\begin{prop} Let $E_Z$ be a vector bundle over $E$. 
+\begin{itemize}
+\item[(1)] Suppose $\mathcal{F} \to S$ is a connected, flat family of vector bundles over $E$ that satisfy conditions $(\sharp)$ with respect to $E_Z$, and $\tilde{\Phi}: E_Z^* \to (\mathcal{F}_s)^*$ is a family of vector bundle morphisms over $E$ such that $\tilde{\Phi}_s$ is an epimprphism for some $s \in S$. Then there is a connect open neighborhood $U$ of $s$ in $S$ and a regular morphism $\Lambda: U \to H_d$ where $d = \sum_{i \geq 0} (h^1(\mathcal{F}_s(i)) - h^1(E_Z(i)))$.
+\item[(2)] The images $\Lambda(s)$ and $\Lambda(t)$ are identical in the punctual Hilbert scheme $H_d$ for two distinct closed points $s, t \in U$ if and only if $\mathcal{F}_s \cong \mathcal{F}_t$ and there is an isomorphism $H: \mathcal{F}_s \to \mathcal{F}_t$ of vector bundles over $E$ with $\tilde{\Phi}_s = \tilde{\Phi}_t \circ H$.
+\end{itemize}
+\end{prop}
+
+Note that two vector bundles over $E$ are isomorphic if and only if they have isomorphic direct summands up to permutation. 
+
+We fix a pair of bundles $E_Z, F_Z$ over $E$ which satisfy conditions $(\sharp)$. Suppose $F_Z$ is decomposable. Define the following sets: 
+\begin{itemize}
+\item[(i)] 
+$\mathcal{M}_Z(F^1, F^2; G) = \{\eta \in \mathrm{Ext}^1(F^2, F^1) \mid F^1 \oplus F^2 \cong F_Z, \textrm{middle term of $\eta$ is isomorphic to $G$}\}$,
+\item[(ii)] 
+$\mathcal{M}_Z(E_Z; F_Z) = \bigcup_{F^1, F^2, G}\mathcal{M}_Z(F^1, F^2; G)$,
+\item[(iii)] 
+$\mathcal{E}_Z(F^1, F^2; G) = \{(G, \Phi) \mid (G, \eta) \in \mathcal{M}_Z(E_Z; F_Z) \textrm{ for some } \eta \in \mathrm{Ext}^1(F^2, F^1), \Phi: E_Z^* \to G^* \textrm{ is an epimorphism} \}$,
+\item[(iv)] 
+$\mathcal{E}_Z(F^1, F^2) = \bigcup_{G}\mathcal{E}_Z(F^1, F^2; G)$, and $\mathcal{E}_Z(G) = \bigcup_{F^1, F^2}\mathcal{E}_Z(F^1, F^2; G)$ 
+\item[(v)] 
+$\mathcal{E}_Z(E_Z; F_Z) = \bigcup_{F^1, F^2, G}\mathcal{E}_Z(F^1, F^2; G)$.
+\end{itemize}
+A bundle $G$ which fulfills an extension $\eta \in \mathcal{M}_Z(F^1, F^2; G)$ is called a generalization of $F_Z$. Also, for a fixed bundle $E_Z$ we define
+\begin{itemize}
+\item[(vi)] $\mathcal{M}_Z(E_Z) = \bigcup_{F_Z}\mathcal{M}_Z(E_Z; F_Z)$, and $\mathcal{E}_Z(E_Z) = \bigcup_{F_Z}\mathcal{E}_Z(E_Z; F_Z)$.
+\end{itemize}
+
+\begin{lemma}
+Suppose $E_Z$ is a vector bundle over $E$.
+\begin{itemize}
+\item[(1)]
+For any vector bundle $F_Z$ which satisfies condition $(\sharp)$ with respect to $E_Z$ and any $(G, \eta) \in \mathcal{M}_Z(E_Z; F_Z)$, the bundle $G$ satisfies condition $(\sharp)$ with respect to $E_Z$. 
+\item[(2)] 
+For any pair of bundles $F^1$ and $F^2$ such that $F^1 \oplus F^2 \cong F_Z$ which satisfies condition $(\sharp)$ with respect to $E_Z$, $\mathcal{M}_Z(F^1, F^2; G)$ is a linear subspace of $\mathrm{Ext}^1(F^2, F^1)$.
+\item[(3)]
+There is a map $\Lambda: \mathcal{E}_Z(E_Z; F_Z) \to H_d$ to the space of closed points of the punctual Hilbert scheme of length $d$, where $d = \sum_{i \geq 0} (h^1(F_Z(i)) - h^1(E_Z(i)))$. Over a length $d$ subscheme $Z$ of $X$ supported at $p$, suppose $G = \ker [E_Z \to I_Z]$ is a generalization of $F_Z$, then the fiber $\Lambda^{-1}([Z])$ is a principal homogeneous space over the group of automorphisms of $G$. In particular, $\mathcal{E}_Z(G) \subset \Lambda^{-1}([Z])$.
+\item[(4)] 
+There is a map $\Pi: \mathcal{E}_Z(E_Z; F_Z) \to \mathcal{M}_Z(E_Z; F_Z)$. For a generalization $G$ of $F_Z$, let $\mathrm{Aut}_1(G)$ be the subgroup of $\mathrm{Aut}(G)$ which consists of automorphisms $\alpha$ which define the same extension class such that the following diagram
+\begin{center}
+\begin{tikzcd}
+0 \arrow[r] & F^1 \arrow[r] \arrow[d, equal] & G \arrow[d, "\alpha"] \arrow[r] & F^2 \arrow[d, equal]\arrow[r] & 0 \\
+0 \arrow[r] & F^1 \arrow[r] & G \arrow[r] & F^2 \arrow[r] & 0
+\end{tikzcd}
+\end{center}
+is commutative for some bundles $F^1$ and $F^2$ with $F^1 \oplus F^2 \cong F_Z$. Then $\mathrm{Aut}_1(G)$ is a normal subgroup of $\mathrm{Aut}(G)$, and the fiber of $\Pi$ over a generalization $G$ of $F_Z$, if not empty, is a principal homogeneous space over $\mathrm{Aut}(G)/\mathrm{Aut}_1(G)$.
+\end{itemize}
+\end{lemma}
+
+To use the preceding lemma to estimate the dimension of the components of the punctual Hilbert scheme $H_d$, we will choose and fix a bundle $E_Z$ and a positive integer $d$. 
+
+
+
+
+
+
+
+
+
+
+
+\end{document}

@@ -1,0 +1,800 @@
+\documentclass{amsart}[12pt]
+
+\usepackage[cmtip,all]{xy}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{mathrsfs}
+\usepackage{amssymb}
+\usepackage{mathtools}
+\usepackage{url}
+\usepackage[top=1.3in, bottom=1.3in, left=1.3in, right=1.3in]{geometry}
+\usepackage{pxfonts}
+\usepackage{tikz-cd}
+\usetikzlibrary{matrix,arrows}
+\usepackage{hyperref}
+\usepackage[boxsize=2em]{ytableau}
+\usepackage{ytableau,varwidth}
+\usetikzlibrary{calc}
+\ytableausetup{centertableaux}
+
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{cor}[theorem]{Corollary}
+\newtheorem{prop}[theorem]{Proposition}
+\theoremstyle{definition}
+\newtheorem{defn}[theorem]{Definition}
+\newtheorem{eg}[theorem]{Example}
+\newtheorem{ex}[theorem]{Exercise}
+\newtheorem{fact}[theorem]{Fact}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{question}[theorem]{Question}
+\newtheorem{obs}[theorem]{Observation}
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+\DeclarePairedDelimiter{\floor}{\lfloor}{\rfloor}
+
+\linespread{1.5}
+
+\theoremstyle{remark}
+\newtheorem{rmk}[theorem]{Remark}
+
+\numberwithin{equation}{section}
+
+%    Absolute value notation
+\newcommand{\abs}[1]{\lvert#1\rvert}
+\newcommand{\To}{\longrightarrow}
+\newcommand*{\sheafhom}{\mathscr{H}\kern -.5pt om}
+
+% ----------------------------------------------------------------
+\begin{document}
+
+\title[Birational geometry of the Hilbert scheme of points]{ Birational geometry of the Hilbert scheme of points on singular surfaces}%
+\author{Xudong Zheng}%
+\address{Johns Hopkins University, 3400 N. Charles St. Baltimore, MD 21218 USA}%
+\email{xzheng27@jhu.edu}%
+
+\maketitle
+\date{\today}%
+
+\section{Introduction}
+The geometry of Hilbert schemes of points on smooth surfaces has played instrumental role connecting algebraic geometry, representation theory, and combinatorics. The study of the Hilbert schemes of points on a surface with certain isolated singularities has also become interesting for several reasons. This note is a sequel of the author's previous work on the Hilbert schemes of points on surfaces with only rational double point singularities, aiming at further investigation of the local geometry of these Hilbert schemes. It is a collection of results generalizing the work of Haiman (\cite{H98, H01}), Ito-Nakamura (\cite{IN99}), Nakajima (\cite{N94, N98}), and Kuznetsov (\cite{K07}).
+
+For a non-singular quasi-projective complex surfaces $X$ and any positive integer $d$, we denote by $\mathrm{Hilb}^d(X)$ (resp., $\mathrm{Sym}^d(X)$) the Hilbert scheme of $d$ points on $X$ (resp., the $d$-th symmetric product of $X$). In \cite[Proposition 2.6]{H98}, Haiman describes the Hilbert-Chow morphism $h: \mathrm{Hilb}^d(\mathbb{A}^2) \to \mathrm{Sym}^d(\mathbb{A}^2)$ as a blow-up. Let $S = \mathbb{C}[x_1, \dots, x_d, y_1, \dots, y_d]$ be the polynomial ring in $2d$ variables. The symmetric group $\mathfrak{S}_d$ acts on $S$ by simultaneously permuting the two groups of variables $(x_1, \dots, x_d)$ and $(y_1, \dots, y_d)$: $\sigma(f(x_1, \dots, x_d, y_1, \dots, y_d)) = f(x_{\sigma^{-1}(1)}, \dots, x_{\sigma^{-1}(d)}, y_{\sigma^{-1}(1)}, \dots, y_{\sigma^{-1}(d)})$ for any $\sigma \in \mathfrak{S}_n$ and $f \in S$. Let $A^0 = \{f \in S \mid \sigma (f) = f, \forall \sigma \in \mathfrak{S}_n\}$ (resp., $A^1 = \{f \in S \mid \sigma (f) = \mathrm{sgn}(\sigma) f, \forall \sigma \in \mathfrak{S}_n\}$) be the space of $\mathfrak{S}_d$-invariant (resp., $\mathfrak{S}_d$-alternating) polynomials in $S$. For any integer $s \geq 2$, we define $A^s = \{f_1\cdot \dots \cdot f_s \mid f_i \in A^1\}$. The direct sum $R = A^0 \oplus A^1 \oplus A^2 \oplus \dots$ is a graded $A^0$-algebra, such that there is a natural morphism $\theta: \mathrm{Proj}(R) \to \mathrm{Spec}(A^0)$. It turns out that there are natural isomorphisms $\mathrm{Spec}(A^0) \cong \mathrm{Sym}^d(\mathbb{A}^2)$, $\mathrm{Proj}(R) \cong \mathrm{Hilb}^d(\mathbb{A}^2)$ such that the Hilbert-Chow morphism $h: \mathrm{Hilb}^d(\mathbb{A}^2) \to \mathrm{Sym}^d(\mathbb{A}^2)$ coincides with $\theta$ (\cite[Proposition 2.6]{H98}).
+
+The first result is a generalization of Haiman's blow-up description of the Hilbert-Chow morphism for $\mathbb{A}^2$ to the case where the surface is affine with a unique ordinary double point singularity. Such a singularity is a quotient singularity. Denote by $A = \mathbb{C}\llbracket u^2, uv, v^2 \rrbracket$ and $R = \mathbb{C}[u^2, uv, v^2]$ the complete local ring of the affine quadric surface $Q \subset \mathbb{A}^3$ at the vertex $0 \in Q$ and the affine coordinate ring of $Q$ respectively. For a positive integer $d$, we denote by $B^0$ the coordinate ring of $\mathrm{Sym}^d(Q)$. The ring $R_{d} = \mathbb{C}[u_1^2, u_1v_1, v_1^2, \dots, u_d^2, u_dv_d, v_d^2]$ inherits an $\mathfrak{S}_d$-action from that on the polynomials ring $\mathbb{C}[u_1, \dots, u_d, v_1, \dots, v_d]$. Let $B^0$ be the subring of $R_d$ consisting of $\mathfrak{S}_d$ invariant polynomials, and let $B^1$ be the sub-$B^0$-module of $R_d$ of $S_d$-alternating polynomials:
+\[
+B^1 = \{f \in R_d \mid \deg(f) \equiv 0(2),  \sigma  (f) = \mathrm{sgn}(\sigma) \cdot f, \forall \sigma \in S_d\}.
+\]
+We also define $B^r \coloneqq \{f_1 \cdot \dots \cdot f_r \mid f_i \in B^1, \forall i = 1, \dots, r\}$ for any $r \geq 2$, and $\mathbf{B} = \bigoplus_{i \geq 0}B^i$.
+Note that for any elements $f \in B^r$ and $g \in B^s$, we have $fg \in B^{r + s}$. Hence $\mathbf{B}$ is a graded $B^0$-algebra, and there is a natural morphism $\theta: \mathrm{Proj}(\mathbf{B}) \to \mathrm{Spec}(B^0)$.
+
+\begin{theorem}\label{blowup}
+There are natural isomorphisms $\mathrm{Spec}(B^0) \cong \mathrm{Sym}^d(Q)$, $\mathrm{Proj}(\mathbf{B}) \cong \mathrm{Hilb}^d(Q)$ such that the Hilbert-Chow morphism $h: \mathrm{Hilb}^d(Q) \to \mathrm{Sym}^d(Q)$ coincides with $\theta$.
+\end{theorem}
+
+Next, Haiman shows that $\mathrm{Hilb}^d(\mathbb{A}^2)$ has trivial canonical bundle: $\omega_{\mathrm{Hilb}^d(\mathbb{A}^2)} \cong \mathcal{O}_{\mathrm{Hilb}^d(\mathbb{A}^2)}$ (\cite[Section 3.6]{H01}). A careful inspection of Haiman's proof leads to a generalization to the singular affine surface $X_n$ with a unique $A_n$ singularity, where $X_n = \mathrm{Spec}(\mathbb{C}[x, y, z]/(xy - z^{n + 1}))$. We denote by $H_d = \mathrm{Hilb}^d(X_n)$ the Hilbert scheme of $d$ points on $X_n$ to simplify the notation. 
+\begin{theorem}\label{canonicalbundle}
+The Hilbert scheme $H_d$ has a nowhere vanishing $2d$-form.
+\end{theorem}
+
+Switching to slightly more general situation we let $X$ be the affine surface with a unique rational double point singularity: $X = \mathbb{C}^2/\Gamma$, where $\Gamma$ is a finite subgroup of $\mathrm{SL}(2, \mathbb{C})$. It is natural to seek for relations between $\mathrm{Hilb}^d(X)$ and another moduli space, the so-called \textit{equivariant Hilbert scheme of points}. First we fix the notations. We denote by $\mathcal{M}_1$ the set of iso-classes of non-trivial irreducible $\Gamma$-representations, $S = \mathbb{C}\llbracket x, y \rrbracket$, $R = S^{\Gamma}$, and $\mathfrak{m}$ the maximal ideal of $R$. If $M$ is a $\mathbb{C}[\Gamma]$-module, we denote by $M[\rho]$ the sum of all the copies of $\rho$ in $M$ for $\rho \in \mathcal{M}_1$, and by $[M : \rho]$ the multiplicity of $\rho$ in $M$. By \cite[Theorem 10.5.1]{IN99}, $[(S / \mathfrak{m}):  \rho_i] =  2\cdot \mathrm{rk}\, \rho_i$ for any $\rho_i \in \mathcal{M}_1$. The $\Gamma$-action on $\mathbb{C}^2$ extends to a $\Gamma$-action on $\mathrm{Hilb}^{l}(\mathbb{C}^2)$ for all $l$. A closed point $[Z] \in \mathrm{Hilb}^{l}(\mathbb{A}^2)$ is invariant under $\Gamma$ if and only if the ideal $I_Z$ of the length $l$ subscheme $Z$ of $\mathbb{A}^2$ is $\Gamma$-equivariant, i.e., $I_Z = g \cdot I_Z$ for any $g \in \Gamma$. If $Z$ is $\Gamma$-invariant, then $\mathcal{O}_Z$ is a finite dimensional $\mathbb{C}[\Gamma]$-module. For any isomorphism class $\rho$ of $\Gamma$-representation, the \textit{equivariant Hilbert scheme} with respect to $\rho$ is the reduced $\Gamma$-fixed subscheme of $\mathrm{Hilb}^{l}(\mathbb{C}^2)$, denoted by $\mathrm{Hilb}^{\rho}([\mathbb{C}^2/\Gamma])$, such that $\mathcal{O}_Z \cong \mathbb{C}[\rho]$: $\mathrm{Hilb}^{\rho}([\mathbb{C}^2/\Gamma]) = \{[Z] \in (\mathrm{Hilb}^{l}(\mathbb{C}^2))^{\Gamma} \mid \mathcal{O}_Z \cong \mathbb{C}[\rho]\}$. 
+
+By \cite[Remarks added in April 2000]{CB01}, $\mathrm{Hilb}^{\rho}([\mathbb{C}^2/\Gamma])$ is smooth and connected for any $\rho$. In particular, if $\rho$ is the regular representation of $\Gamma$, then $\mathrm{Hilb}^{\rho}([\mathbb{C}^2/\Gamma])$ is naturally isomorphic to the crepant resolution of the singularity $X$. Our next result is a higher rank generalization.  We are interested in the case where $\rho$ is the $d$-fold regular representation for $d \geq 2$. In that case, we denote $\mathrm{Hilb}^{\rho}([\mathbb{C}^2/\Gamma])$ by $\mathrm{Hilb}^{d}([\mathbb{C}^2/\Gamma])$, and we have the following
+
+\begin{theorem}\label{crepant}
+Let $d$ be any positive integer. For each $d$, there is a proper birational morphism $f: \mathrm{Hilb}^{d}([\mathbb{C}^2/\Gamma]) \to \mathrm{Hilb}^{d}(X)$, called the \textit{quotient scheme morphism}. This is a crepant resolution of singularities of $\mathrm{Hilb}^{d}(X)$.
+\end{theorem}
+The proof of this theorem involves the calculation of the decomposition multiplicity formula of Ito-Nakamura type (\cite[Theorem 10.5.1]{IN99}) for not only the maximal ideal of the $\Gamma$-invariant ring but for any ideals of finite colength (Lemma \ref{equivhilbfunc}). As a consequence, we can  characterize the singular loci of $\mathrm{Hilb}^{d}(X)$ in terms of the homological dimension of subschemes of $X$ (Corollary \ref{singularloci}), and confirm that the quotient scheme morphism is semismall (Corollary \ref{semismall}). 
+
+
+\section{Ordinary double points}
+
+In this section, we prove Theorem \ref{blowup} using an argument closely following \cite[Section 2]{H98} and inspiration from \cite{ES14}. 
+
+Denote by $\Lambda \subset \mathbb{N}^2$ the sublattice consisting of vertices $(x, y)$ with $x + y$ even. The minimal generating set of $\Lambda$ is $\Lambda_0 = \{(2, 0), (1, 1), (0, 2)\}$. A \textit{staircase} in $\Lambda$ is a subset $\Delta \subset \Lambda$ such that its complement $E(\Delta) \coloneqq \Lambda \setminus \Delta \subset \Lambda$ is closed under the semi-group addition, i.e., $E(\Delta) + \Lambda_0 = E(\Delta)$. Let $\Delta \subset \Lambda$ be a staircase, the \textit{corner set} of $\Delta$ is the subset $\mathcal{C}(\Delta) \subset E(\Delta)$ that minimally generate $E(\Delta)$ under the semi-group addition, i.e., $\mathcal{C}(\Delta) = \{\alpha \in E(\Delta) \mid \alpha - \mathbf{a} \in \Delta,  \forall \mathbf{a} \in \Lambda \}$. Let $\Delta$ be a staircase, the \textit{border} of $\Delta$ is the set of vertices $\mathcal{B}(\Delta) = (\bigcup_{\mathbf{a} \in \Lambda_0} \langle \Delta + \mathbf{a} \rangle) \setminus \Delta$.
+
+Suppose $D = \{(p_1, q_1), \dots, (p_d, q_d)\} \subset \Lambda$ is any subset with cardinality $\abs{D} = d$. Associated to $D$ there is the monomial matrix $M(D) \coloneqq \begin{bmatrix} u^{p_i}v^{q_i}\end{bmatrix}$ up to a permutation of the elements of $D$. We define the \textit{lattice discriminant} associated to $D$ to be the discriminant $\det(D) \coloneqq \det M(D)$. Up to sign, $\det(D)$ is a well-defined $\mathfrak{S}_d$-alternating polynomial, hence it defines an element in $B^1$. 
+
+To prove the theorem we give an open covering of $\mathrm{Hilb}^d(Q)$ and a system of coordinates on each open set. For any staircase $\Delta$ of cardinality $d$, we define a subfunctor $\underline{Hilb}^d_{Q, \Delta}: \mathbb{C}-\underline{\mathrm{Sch}} \To \underline{\mathrm{Set}}$ of the Hilbert functor of points as follows: For a scheme $U$, $\underline{Hilb}^d_{Q, \Delta}(U)$ is the set of closed subschemes $Y \subset Q \times U$, flat and finite of degree $d$ over $U$, such that the composition of $\mathcal{O}_U$-algebra homomorphisms
+$\phi_{\Delta, U}(Y): \mathcal{O}_U[\Delta] \xhookrightarrow{\iota} \mathcal{O}_U\otimes_{\mathbb{C}} R \rightarrow \mathcal{O}_Y$ is surjective, where $\mathcal{O}_U[\Delta]$ denotes the rank $d$ locally free $\mathcal{O}_U$-submodule of $\mathcal{O}_U\otimes_{\mathbb{C}} R$ generated by elements whose exponents are in $\Delta$ with $\mathcal{O}_U$-algebra structure induced by the inclusion $\iota$ ($\mathbb{C}[\Delta]$ is the $d$-dimensional $\mathbb{C}$-vector space spanned by $u^av^b$ for $(a, b) \in \Delta$ and as a $\mathbb{C}$-algebra $\mathbb{C}[\Delta] \cong R/I_{\Delta}$).
+
+\begin{prop}
+This subfunctor $\underline{Hilb}^d_{Q, \Delta}$ is represented by a subscheme $\mathrm{Hilb}^d_{\Delta}(Q) \subset \mathrm{Hilb}^d(Q)$. Any closed point $[Z]$ of $\mathrm{Hilb}^d_{\Delta}(Q)$ can be specialized to $[Z_{\Delta}]$, defined by the initial ideal $I_{\Delta}$ of $I_Z$ via some $\mathbb{C}^*$-action.
+\begin{proof}
+Let $U$ be any scheme, and let $f: U \To \mathrm{Hilb}^d(Q)$ be a morphism which induces a family of closed subschemes $Y$ of $U \times Q$, flat and finite of degree $d$ over $U$. Suppose $\phi_{\Delta, U}(Y)$ is surjective. 
+
+Let $x \in U$ be a (not necessarily closed) point in $U$ with coordinate ring $\mathcal{O}_x = \mathcal{O}_U/\mathfrak{m}_x$, and let $Y_x$ be the fiber of $Y$ over $x$ whose ideal in $R \otimes_{\mathbb{C}} \mathcal{O}_x$ is denoted by $I_x$. The restriction of the composition $\phi_{\Delta, U}(Y)$ is an isomorphism of finite $\mathcal{O}_x$-algebras: $\phi_x: \mathcal{O}_x[\Delta] \To \mathcal{O}_{Y_{x}}$. Hence, there exists $g_1, \dots, g_r \in \mathcal{O}_x[\Delta]$ such that
+\[
+\{f_i = u^{\alpha_i}v^{\beta_i} - g_i \mid i = 1, \dots, r, (\alpha_i, \beta_i) \in \mathcal{C}(\Delta), \mathrm{Exp}(g_i) \in \Delta\}
+\]
+is a generating set of the ideal $I_x$. Since $\Delta$ is a finite set, one can choose a weight pair $(\lambda_1, \lambda_2)$ for a one-parameter torus so that the weights of $u^{\alpha_i}v^{\beta_i}$ are all higher than the weight of any monomials with exponents inside $\Delta$. As a result, $\lim_{t \to 0}(t^{\lambda_1}, t^{\lambda_2})\cdot f_i = u^{\alpha_i}v^{\beta_i}$ for all $i$. Comparing the length we have $\langle u^{\alpha_1}v^{\beta_1}, \dots, u^{\alpha_r}v^{\beta_r}\rangle = I_{\Delta}$. This shows that $f(x) \in \mathrm{Hilb}^d_{\Delta}(Q)$.
+
+Conversely, for any point $i: x \hookrightarrow \mathrm{Hilb}^d_{\Delta}(Q)$ corresponding to a closed subscheme $Z$ of $Q \times x$, by definition of the set $\underline{Hilb}^d_{Q, \Delta}(x)$ there exists a set of generators of $I_Z$ of the form $f_i = u^{\alpha_i}v^{\beta_i} - g_i$ for $i = 1, \dots, r$. Choosing the one-parameter torus as above, one shows that $\phi_x: \mathcal{O}_x[\Delta] \to \mathcal{O}_Z$ is an $\mathcal{O}_x$-linear isomorphism.
+
+The surjectivity of $\phi_{\Delta, U}$ is an open condition, so the subscheme $\mathrm{Hilb}^d_{\Delta}(Q)$ is open in $\mathrm{Hilb}^d(Q)$. 
+\end{proof}
+\end{prop}
+
+Next we describe the affine coordinate ring of each $\mathrm{Hilb}^d_{\Delta}(Q)$. Let $\Delta$ be a staircase of cardinality $d$ with corner set $\mathcal{C}(\Delta) = \{(\alpha_0, \beta_0), \dots, (\alpha_r, \beta_r)\}$. Let $[Z] \in \mathrm{Hilb}^d_{\Delta}(Q)$ be a closed points.
+
+\begin{lemma}\label{coordinate system}
+There is a generating set of the ideal defining the scheme $Z$ of the form $f_0, \dots, f_r$ where $f_i = u^{\alpha_i}v^{\beta_i} - g_i$ with $g_i = \sum_{(a, b) \in \Delta}C_{a, b}^{\alpha_i, \beta_i}u^av^b$ for some constants $C_{a, b}^{\alpha_i, \beta_i}$.
+\begin{proof}
+By the definition of $\mathrm{Hilb}^d_{\Delta}(Q)$, fixing the scheme $Z$ with ideal $I_Z \subset R$, for any $(r, s) \in \Lambda$, there exist $C^{r, s}_{a, b} \in \mathbb{C}$ such that
+\[
+u^rv^s \equiv \sum_{(a, b) \in \Delta}C^{r, s}_{a, b}u^av^b (\textrm{mod } I_Z).
+\]
+There are relations among the $C^{r, s}_{a, b}$, which are given as follows. Multiplying both sides of the above congruence equation by $u^2, uv$, or $v^2$ we obtain
+\begin{equation*}
+C^{r + 2, s}_{a, b} = \sum_{(a', b') \in \Delta} C^{r, s}_{a', b'}C^{a' + 2, b'}_{a, b}, \quad C^{r + 1, s + 1}_{a, b} = \sum_{(a', b') \in \Delta} C^{r, s}_{a', b'}C^{a' + 1, b' + 1}_{a, b},
+\quad C^{r, s+ 2}_{a, b} = \sum_{(a', b') \in \Delta} C^{r, s}_{a', b'}C^{a', b' + 2}_{a, b}.
+\end{equation*}
+Hence, for any ideal $I_Z$ one can use these relations to reduce the generating set such that each generator has exactly one term that is not in $\Delta$ but in $\mathcal{C}(\Delta)$.
+\end{proof}
+\end{lemma}
+
+\begin{rmk}
+As $Z$ varies the $C^{r, s}_{a, b}$'s define a collection of regular functions on $\mathrm{Hilb}^d_{\Delta}(Q)$. The relations in the proof of the previous lemma remain valid as relations among regular functions on $\mathrm{Hilb}^d_{\Delta}(Q)$.
+\end{rmk}
+
+\begin{prop}\label{cab}
+Let $\Delta$ be a staircase in $\Lambda$ of cardinality $d$. The affine coordinate ring of the scheme $\mathrm{Hilb}^d_{\Delta}(Q) = \mathrm{Spec}(S^{\Delta})$ is given by $S^{\Delta} = \mathbb{C}[C^{\alpha}_{\beta}]/I^{\Delta}$ for $\alpha \in \mathcal{B}(\Delta)$, $\beta \in \Delta$ and
+\begin{equation}
+I^{\Delta} = \left\langle C^{\alpha + \lambda}_{\beta} - \sum_{\gamma \in \Delta}C^{\alpha}_{\gamma}C^{\gamma + \lambda}_{\beta},  \sum_{\gamma \in \Delta}C^{\epsilon + \lambda}_{\gamma}C^{\gamma + \lambda'}_{\beta} - \sum_{\gamma \in \Delta}C^{\epsilon + \lambda'}_{\gamma}C^{\gamma + \lambda}_{\beta} \right\rangle,
+\end{equation}
+for all $\alpha \in \mathcal{B}(\Delta), \lambda, \lambda' \in \Lambda_0$ such that $\alpha + \lambda \in \mathcal{B}(\Delta)$, with the additional convention that $C^{\alpha}_{\beta} = 0$ and $C^{\beta}_{\beta} = 1$ for $\alpha, \beta \in \Delta, \alpha \neq \beta$.
+\begin{proof}
+We first show that $\mathrm{Hilb}^d_{\Delta}(Q)$ embeds into an infinite dimensional affine space $\mathrm{Spec}(S')$, where $S' = \mathbb{C}[C^{r, s}_{a, b}]$ for $(r, s) \in E(\Delta)$ and $(a, b) \in \Delta$ and the ideal defining $\mathrm{Hilb}^d_{\Delta}(Q)$ in $\mathrm{Spec}(S')$ is of the same form as $I_{\Delta}$ as in the statement of the lemma without the restriction that $\alpha$ is chosen to be inside $\mathcal{B}(\Delta)$ such that $\alpha + \lambda \in \mathcal{B}(\Delta)$. We denote this ideal by $I'_{\Delta}$ and $S'_{\Delta} = S'/I'_{\Delta}$.
+
+Let $Y$ be a family of length $d$ subscheme of $Q$ over a scheme $U$ with the property that $\rho: \mathcal{O}_U[\Delta] \xhookrightarrow{\iota} \mathcal{O}_U \otimes_k S \xrightarrow{\mu} \mathcal{O}_Y$ is surjective, and let $\phi: U \to \mathrm{Hilb}^d_{\Delta}(Q)$ be the corresponding morphism. The coordinate ring of $U$ is denoted by $B = \Gamma(U, \mathcal{O}_U)$ and the ideal of $Y$ in $U \times Q$ is denoted by $I_Y$. We define a $\mathbb{C}$-algebra homomorphism $\tau: S'_{\Delta} \to B$ as follows. For any $(r, s) \in E(\Delta)$,  since $\rho$ is surjective $\mu(1 \otimes u^rv^s) \in B \otimes_{\mathbb{C}} S /I_Y$ lifts to a unique element in $B[\Delta]$ as an $B$-linear combination of $u^av^b$'s for $(a, b) \in \Delta$. We define $\tau(C^{r, s}_{a, b})$ to be the coefficient of $u^av^b$ of the image of $u^rv^s$ under the lifting map.
+
+Now we check that this is a well-defined $\mathbb{C}$-algebra homomorphism. Since $\mu$ is the canonical $\mathcal{O}_U$-algebra surjection, by comparing $\mu(1 \otimes u^rv^s)$ with $\mu(1 \otimes u^{r + 2}v^s)$ (and $\mu(1 \otimes u^{r + 1}v^{s + 1})$, $\mu(1 \otimes u^{r}v^{s + 2})$) we see that $\tau (C^{\alpha + \lambda}_{\beta} - \sum_{\gamma \in \Delta}C^{\alpha}_{\gamma}C^{\gamma + \lambda}_{\beta}) = 0$ for any vertex $\alpha \in E(\Delta)$ and basis element $\lambda \in \Lambda_0$. This shows that $\tau$ is multiplicative. Also, we consider any $(r_i, s_i)$ for $i = 1, 2, 3, 4$ such that the four vertices in $\Lambda$ form a parallelogram. By induction on the lengths of the sides of the parallelogram, it is enough to consider those parallelograms whose interior is a fundamental domain of the lattice, i.e., those which do not contain any proper subparallelograms. So we assume that $(r_i, s_i) - (r_1, s_1) = \lambda_i$ for $i = 2, 3$ and $\lambda_i \in \Lambda_0$. By the identity
+\[
+\mu(1 \otimes u^{r_4}v^{s_4}) = \mu(1 \otimes u^{r_3}v^{s_3}) \mu(1 \otimes (uv)^{\lambda_2}) =  \mu(1 \otimes u^{r_2}v^{s_2}) \mu(1 \otimes (uv)^{\lambda_1}),
+\]
+we see that
+ \[
+ \tau\left(\sum_{\gamma \in \Delta}C^{\epsilon + \lambda}_{\gamma}C^{\gamma + \lambda'}_{\beta} - \sum_{\gamma \in \Delta}C^{\epsilon + \lambda'}_{\gamma}C^{\gamma + \lambda}_{\beta}\right) = 0.
+ \]
+
+This shows that $\tau$ is a well-defined $\mathbb{C}$-algebra homomorphism. In particular, in the case when $U = \mathrm{Hilb}^d_{\Delta}(Q)$ there is a morphism $\mathrm{Hilb}^d_{\Delta}(Q) \To \mathrm{Spec}(S'_{\Delta})$.
+
+On the other hand, one checks in the same way that $\mathrm{Spec}(S'_{\Delta})$ parameterizes a family $\tilde{S'_{\Delta}}$ of zero-dimensional schemes of length $d$ in $Q$ with the property that $S'_{\Delta}[\Delta] \xhookrightarrow{\iota} S'_{\Delta} \otimes_{\mathbb{C}} S \rightarrow \mathcal{O}_{\tilde{S'_{\Delta}}}$ is surjective. Therefore there is a morphism $g: \mathrm{Spec}(S'_{\Delta}) \To \mathrm{Hilb}^d_{\Delta}(Q)$. One checks that for any triple $(U, \phi: U \To \mathrm{Hilb}^d_{\Delta}(Q)$ and $\tau: S'_{\Delta} \To \Gamma(U, \mathcal{O}_U))$ as above, the map $\phi$ factors as $\phi = g \circ \tau^*$.
+
+We further reduce the dimension of the ambient affine space in the previous step. By repeatedly using the first collection of relations above, we can further reduce to the case where $(r_1, s_1) \in \Delta$.
+\end{proof}
+\end{prop}
+
+In particular, the proof of the preceding proposition implies the following
+\begin{cor}
+Notations as before, fixing a staircase $\Delta$, the $C^{\alpha}_{\beta}$'s form a system of parameters at the $\mathbb{C}^*$-fixed point $Z_{\Delta}$ with monomial ideal $I_{\Delta}$. The maximal ideal $\mathfrak{m}_{\Delta} \coloneqq\langle C^{\alpha}_{\beta}\rangle$ defines this point $Z_{\Delta}$ as the origin of the affine space $\mathrm{Spec}(S^{\Delta}) = \mathrm{Spec}(\mathbb{C}[C^{\alpha}_{\beta}])$ via the embedding given in the previous proposition.
+\end{cor}
+
+\begin{cor}
+Denote by $\widetilde{\mathrm{Hilb}}^d_{\Delta}(Q) \coloneqq \pi_d^{-1}(\mathrm{Hilb}^d_{\Delta}(Q))$ the preimage in the universal family. Then as a (not necessarily reduced) subscheme of $\mathrm{Hilb}^d_{\Delta}(Q) \times Q$, $\widetilde{\mathrm{Hilb}}^d_{\Delta}(Q)$ is defined by $\tilde{\mathcal{I}_{\Delta}} = \langle u^rv^s - \sum_{(a, b) \in \Delta}C^{r, s}_{a, b}u^av^b \rangle$, where, by abuse of notation, $C^{r, s}_{a, b}$ are the regular functions on $\mathrm{Hilb}^d_{\Delta}(Q) \times Q$ that are pulled back from $\mathrm{Hilb}^d_{\Delta}(Q)$ and $u^av^b$ are pullbacks of regular functions on $Q$.
+\begin{proof}
+The proof of \cite[Proposition 2.9]{H98} works verbatim.
+\end{proof}
+\end{cor}
+
+To prove Theorem \ref{blowup}, we work on each open subset $\mathrm{Hilb}^d_{\Delta}(Q)$ associated with a fixed staircase. We note that any $\mathfrak{S}_d$-alternating polynomial in $R_d$ is a linear combination of lattice discriminants, i.e., $B^1$ is $\mathbb{C}$-linearly spanned by the set of all lattice discriminants associated to subsets of $\Lambda$ of cardinality $d$. 
+
+\begin{proof}[Proof of Theorem \ref{blowup}]
+The proof of the theorem is almost identical to that of \cite[Proposition 2.6]{H98}. Suppose $\Delta = \{(a_i, b_i)\}_{i = 1, \dots, d}$ is a staircase and $D = \{(r_i, s_i)\}_{i = 1, \dots, d}$ is any subset of $\Lambda$ of cardinality $d$. We first work in the locus $U_{\Delta}$ of reduced schemes in $\mathrm{Hilb}^d_{\Delta}(Q)$, which is dense open since $\mathrm{Hilb}^d_{\Delta}(Q)$ is irreducible. For any point $[Z] \in U_{\Delta}$ the image $h([Z])$ is a 0-cycle of $d$ distinct points, hence $\det^2(\Delta)(h([Z])) \neq 0$ (we are taking the square of the lattice determinant since the determinant only defines an alternating function). 
+
+By Lemma \ref{coordinate system}, the lattice discriminants $\det(D)$ and $\det(\Delta)$ are related by
+\[
+h^*\left(\dfrac{\det(D) \det(\Delta)}{\det^2(\Delta)}\right) = \det\left(\begin{bmatrix}C^{r_i, s_i}_{a_j, b_j}\end{bmatrix}_{1 \leq i, j \leq d}\right),
+\]
+where $C^{r_i, s_i}_{a_j, b_j}$ are regular functions on $U_{\Delta}$. It follows that $h^*\left(\dfrac{\det(D) \det(\Delta)}{\det^2(\Delta)}\right)$ extends to a regular function on $\mathrm{Hilb}^d_{\Delta}(Q)$. Hence $h^*(B^2)$ is a principal ideal generated by $h^*(\det^2(\Delta))$ over $\mathrm{Hilb}^d_{\Delta}(Q)$. 
+
+Note that $\mathrm{Proj}(\mathbf{B}) \cong \mathrm{Proj}(\mathbf{B}^{[2]})$, where $\mathbf{B}^{[2]} \coloneqq \bigoplus_{k = 2i, i \in \mathbb{N}}B^{k}$. By considering all the staircases $\Delta$ of cardinality $d$, the preceding paragraph shows that $\theta: \mathrm{Proj}(\mathbf{B}) \to \mathrm{Sym}^d(Q)$ is identified as the blow-up of $\mathrm{Sym}^d(Q)$ along the ideal $B^2 \subset B^0$. 
+
+By the universal property of blow-up, there is a projective morphism $f_{\Delta}: \mathrm{Hilb}^d_{\Delta}(Q) \to \mathrm{Proj}(\mathbf{B}^{[2]})|_{\theta^{-1}(h(\mathrm{Hilb}^d_{\Delta}(Q)))}$ over $h(\mathrm{Hilb}^d_{\Delta}(Q))$, which glues to a projective morphism $f: \mathrm{Hilb}^d(Q) \to \mathrm{Proj}(\mathbf{B}^{[2]})$. In fact, $f$ is birational and surjective since both sides of $f$ are irreducible, birational to $\mathrm{Sym}^d(Q)$, and projective over $\mathrm{Sym}^d(Q)$. 
+
+To show that $f$ is in fact an isomorphism over $\mathrm{Sym}^d(Q)$ it remains to show that $f$ is an embedding. For that matter, it suffices to show that $f^*\mathcal{O}_{\mathrm{Proj}(\mathbf{B}^{[2]})} \to \mathcal{O}_{\mathrm{Hilb}^d(Q)}$ is surjective. Again we work locally over each open set $\mathrm{Hilb}^d_{\Delta}(Q)$. By Proposition \ref{cab}, the system of functions $C_{a, b}^{r, s}$ generate the affine coordinate ring of $\mathrm{Hilb}^d_{\Delta}(Q)$ with $(a, b) \in \Delta$ and $(r, s) \in \Lambda \setminus \Delta$. Hence to show the surjectivity of $f^*$, it suffices to show that each $C_{a, b}^{r, s}$ is in the image of $f^*$. We take the subset $D$ of $d$ elements in $\Lambda$ by $D \coloneqq \Delta \setminus \{(a, b)\} \cup \{(r, s)\}$. Over $U_{\Delta}$ we have that $C_{a, b}^{r, s} = f^*\theta^*(\det(D)/\det(\Delta))$. It follows that $f$ is an embedding restricted to $U_{\Delta}$ and so as restricted to the closure of $U_{\Delta}$. Now we glue over all the staircases $\Delta$ to complete the proof.
+\end{proof}
+
+In light of the work of Haiman, we also mention some further geometric consequence of Theorem \ref{blowup}. Denote by $\mathcal{O}(1)$ the ample line bundle on $\mathrm{Hilb}^d(Q)$ associated with the blow-up structure given by Theorem \ref{blowup}. Note that there is the tautological bundle $\mathcal{T}_d \coloneqq (\pi_d)_*(\mathcal{O}_{\widetilde{\mathrm{Hilb}}^d(Q)})$ of rank $d$. 
+
+\begin{cor}(cf. \cite[Proposition 2.12]{H98})
+There is an identification of line bundles $\wedge^d \mathcal{T}_d \cong \mathcal{O}(1)$ on $\mathrm{Hilb}^d(Q)$.
+\begin{proof}
+Again the proof is identical to that of \cite[Proposition 2.12]{H98}. 
+\end{proof}
+\end{cor}
+
+\section{Global top differential forms}
+
+In this section, we prove Theorem \ref{canonicalbundle}.
+\begin{lemma}[Residue formula]
+The affine surface $X_n$ has a rational nowhere vanishing 2-form. In fact, the same statement is true for any hypersurface in $\mathbb{A}^3$.
+\begin{proof}
+Let $dx \wedge dy \wedge dz$ be the volume form on $\mathbb{A}^3$, and write $f = xy - z^{n + 1}$. Then 
+\[
+\dfrac{dx \wedge dy}{\dfrac{\partial f}{\partial z}} = - \dfrac{dy \wedge dz}{\dfrac{\partial f}{\partial x}} = \dfrac{dz \wedge dx}{\dfrac{\partial f}{\partial y}}  
+\]
+defines this nowhere vanishing 2-form on $X_n$. This is independent of $f$.
+\end{proof}
+\end{lemma}
+
+We follow the notations of Haiman: for a linear form $l$ in $x, y, z$, denote by $U_l$ the open subset of $H_d$ parameterizing subschemes $Z$ such that $\mathcal{O}_Z \cong \langle 1, l, \dots, l^{d - 1}\rangle$ as a $d$-dimensional vector space, and by $W$ the open subset of $H_d$ parameterizing reduced length $d$ subschemes.
+
+\begin{lemma}\label{openset}
+The complement of $U_x \cup U_z$ has codimension at least 2 in $H_d$.
+\begin{proof}
+We prove the statement in the case of the quadric cone $Q$, and show that $U_x$ is open dense in $H_d$. The same argument remains valid for general $X_n$. Note that a general point $[Z] \in U_x$ corresponds to an ideal $I$ of $R$ of the form: 
+\[
+I = \langle x^d - a_0 - a_1x - \dots - a_{d - 1}x^{d - 1}, y - b_0 - b_1x - \dots - b_{d - 1}x^{d - 1},  z - c_0 - c_1x - \dots - c_{d - 1}x^{d - 1} \rangle.
+\]
+Suppose $Z$ is a reduced scheme supported on the line $l_x = \langle y, z \rangle \subset Q$, then the coefficients $a_0, \dots, a_{d - 1}$ are the elementary symmetric functions on the $x$-coordinates of the $d$ points of $Z$. Then $b_0, \dots, b_{d - 1}$ are uniquely determined by the interpolation relation $y_i = \mathbf{b}(x_i)$ for the $y$-coordinates of these points (here $\mathbf{b}(x_i) = b_0 + b_1x_i + \dots + b_{d - 1}x_i^{d - 1}$). Once the $a_i$ and $b_i$ are determined and $a_0 \neq 0$, then the $c_i$ are solved by the syzygetic relation given by $f = xz - y^2$. If $a_0 = 0$, then we see that $b_0 = 0$ as well. Consequently $c_0, \dots, c_{d - 2}$ are uniquely solved in terms of $a_1, \dots, a_{d -1}, b_1, \dots, b_{d - 1}, c_{d - 1}$, and $c_{d - 1}$ will not appear in the eventual expression of $z$ in terms of $x, \dots, x^{d - 1}$. This shows that $U_x$ is an open subset of $\mathbb{A}^{2d}: U_x = \mathrm{Spec}(\mathbb{C}[a_0, \dots, a_{d - 1}, b_0, \dots, b_{d - 1}]_{a_0}) \cup \mathrm{Spec}(\mathbb{C}[a_1, \dots, a_{d - 1}, b_1, \dots, b_{d - 1}])$.
+
+The complement of $U_x \cup U_z$ in $W$ consists of schemes consisting of $d$ distinct points $p_1, \dots, p_d \in Q$ with at least two indices $i \neq j$ and two indices $k \neq l$ such that $x(p_i) = x(p_j)$ and $z(p_k) = z(p_l)$. This is a codimension 2 subset of $W$. The complement $H_d \setminus W$ has codimension 1 in $H_d$. Now a general point in $H_d \setminus W$ represents a scheme $Z$ with a length $2$ subscheme $Z_1$ and $d - 2$ reduced closed points, which constitute an open subset of $H_d \setminus W$. This open subset is not contained in $H_d \setminus (U_x \cup U_z)$. 
+\end{proof}
+\end{lemma} 
+
+\begin{proof}[Proof of Theorem \ref{canonicalbundle}]
+We first prove the statement over the open dense subset $W$. Restricting to $W \cap U_x$, by the proof of Lemma \ref{openset} we note that the coefficients $a_0, \dots, a_{d - 1}, b_0, \dots, b_{d - 1}$ are regular functions on $U_x$. The rational $2d$-form $dx_1 \wedge \dots \wedge dx_d \wedge dy_1 \wedge \dots \wedge dy_d / \Pi_{i = 1}^d(\partial f / \partial z_i)$ on $X_n^{d}$ is $S_d$-invariant and hence descends to a regular $2d$-form on the smooth locus of $X_n^{(d)}$, which in turn lifts to a regular $2d$-form to $W \cap U_x$. In particular, if we write $W^{\circ}$ for the open locus in $W$ of reduced schemes supported off the singularity in $X_n$, then we have the identity over $W^{\circ} \cap U_x$:
+\begin{equation}\label{2dform}
+\dfrac{d a_0 \wedge d a_1 \wedge \dots \wedge da_{d - 1} \wedge db_0 \wedge \dots \wedge db_{d - 1}}{a_0} = (-1)^{d} \dfrac{dx_1 \wedge \dots \wedge dx_d \wedge dy_1 \wedge \dots \wedge dy_d}{\Pi_{i = 1}^d(\partial f / \partial z_i)}.
+\end{equation}
+Next we notice that $W \setminus W^{\circ}$ parameterizes reduced schemes of the form $Z = z_1 +  \dots + z_d$ where $z_1 = 0$. This has codimension 2 in $W$, hence the rational form \ref{2dform} extends to a regular $2d$-form on $W \cap U_x$. By the symmetry of $x$ and $z$ in the defining equation of the surface $X_n$, we obtain another regular $2d$-form on $W^{\circ} \cap U_z$ analogous to \ref{2dform}. 
+
+Explicitly, a point in $U_z$ represents a scheme that is defined by an ideal of the form 
+\[ I = \langle  z^d - A_0 - A_1z - \dots - A_{d - 1}z^{d - 1}, y - B_0 - B_1z - \dots - B_{d - 1}z^{d - 1}, x - C_0 - C_1z - \dots - C_{d - 1}z^{d - 1}\rangle.
+\]
+The $2d$-forms $d a_0 \wedge d a_1 \wedge \dots \wedge da_{d - 1} \wedge db_0 \wedge \dots \wedge db_{d - 1}/a_0$ and $d A_0 \wedge d A_1 \wedge \dots \wedge dA_{d - 1} \wedge dB_0 \wedge \dots \wedge dB_{d - 1}/A_0$ coincide over the intersection $W \cap U_x \cap U_z$. So there is a nowhere vanishing $2d$ form on $U_x \cup U_z$ which extends to a nowhere vanishing $2d$ form on $H_d$.
+\end{proof}
+
+
+
+\section{The quotient-scheme morphism}
+Throughout this section, we denote by $X$ the affine surface singularity $X = \mathrm{Spec}(\mathbb{C}[x, y]^{\Gamma})$ for a finite group $\Gamma \leq \mathrm{SL}(2, \mathbb{C})$. 
+
+Let $\mathcal{H}^d_{\Gamma}$ (resp., $\mathcal{H}^{dN, \Gamma}$) be the Hilbert functor represented by $\mathrm{Hilb}^d(X)$ (resp., $\mathrm{Hilb}^{d}([\mathbb{C}^2/\Gamma])$). Suppose $Y$ is any scheme over $\mathbb{C}$, and $\pi: \mathcal{Z} \to Y$ is a $Y$-scheme that corresponds to an element of the set $\mathcal{H}^{dN, \Gamma}(Y)$. Then $\pi_* \mathcal{O}_{\mathcal{Z}}$ is a locally free $\mathcal{O}_Y$-module with a $\Gamma$-action. If $U$ is any open subset of $Y$ where $\pi_* \mathcal{O}_{\mathcal{Z}}$ trivializes, then there is the $\Gamma$-eigenspace decomposition $\pi_* \mathcal{O}_{\mathcal{Z}}(U) \cong \bigoplus_i \mathcal{O}_Y(U)[\rho_i]^{\oplus d \mathrm{rk}\, \rho_i}$. By varying the open subset $U$ of $Y$ in an open cover of $Y$ the $\mathcal{O}_Y(U)$-modules $\mathcal{O}_Y(U)^{\oplus d}$ as a direct summand of $\pi_* \mathcal{O}_{\mathcal{Z}}(U)$ with trivial $\Gamma$-action glue as a locally free sheaf of $\mathcal{O}_Y$-modules of rank $d$. Suppose $y$ is any point in $Y$, then the stalk $(\pi_* \mathcal{O}_{\mathcal{Z}})_p$ is an Artinian algebra such that its $\Gamma$-fixed summand is a length $d$ quotient algebra of $\mathbb{C}[x, y]^{\Gamma}$, which defines a length $d$ zero-dimensional subscheme of $X$. By varying the point in $Y$, we obtain a family of length $d$ schemes over $Y$. The association to this family of length $d$ schemes over $Y$ uniquely determines a morphism $f: \mathrm{Hilb}^{d}([\mathbb{C}^2/\Gamma]) \to \mathrm{Hilb}^d(X)$, called the \textit{quotient scheme morphism}. Suppose $Z$ is a length $d$ subscheme of $X$ with ideal $I_Z$. The set-theoretic fiber $f^{-1}([Z])$ is $f^{-1}([Z]) = \{[Z'] \in \mathrm{Hilb}^{d}([\mathbb{C}^2/\Gamma]) \mid I_Z^e \subset I_{Z'}\}$, where $I_Z^e$ is the extended ideal of $I_Z$. 
+
+\begin{lemma}\label{proper}
+The quotient scheme morphism $f: \mathrm{Hilb}^{d}([\mathbb{C}^2/\Gamma]) \to \mathrm{Hilb}^d(X)$ is proper for any $d$.
+\begin{proof}
+Let $K$ be any field and $V$ be any valuation ring with quotient field $K$. Suppose there is the following commutative diagram
+\begin{center}
+\begin{tikzcd}
+\mathrm{Spec} (K) \arrow[r, "\phi"] \arrow[d, "\sigma"]
+& \mathrm{Hilb}^d([\mathbb{C}^2/\Gamma])  \arrow[d, "f" ] \\
+\mathrm{Spec} (V) \arrow[r, , "\eta" ]
+& \mathrm{Hilb}^d(X)
+\end{tikzcd}
+\end{center}
+By the universal property of the (equivariant) Hilbert scheme, the pullback of the universal family of $\mathrm{Hilb}^d([\mathbb{C}^2/\Gamma])$ over $\phi$ (resp., of $\mathrm{Hilb}^d(X)$ over $\eta$) is a flat family of schemes $\mathcal{Z}_1$ over $\mathrm{Spec} (K)$ of degree $dN$ (resp., a flat family of schemes $\mathcal{Z}$ over $\mathrm{Spec} (V)$ of degree $d$). Note that $\mathcal{Z}$ is an affine $V$-scheme (resp., $\mathcal{Z}_1$ is an affine $K$-scheme). There is an Artinian $\mathbb{C}$-algebra $A$ of length $d$ such that $\mathcal{Z} \cong \mathrm{Spec}(V \otimes_{\mathbb{C}}A)$ (resp., Artinian $\mathbb{C}$-algebra $B$ of length $dN$ with a $\Gamma$-action such that $B^{\Gamma} \cong A$ and $\mathcal{Z}_1 \cong \mathrm{Spec}(K \otimes_{\mathbb{C}}B)$) and the following diagram is commutative.
+\begin{center}
+\begin{tikzcd}
+V \arrow[r] \arrow[d]
+& V \otimes_{\mathbb{C}}A \arrow[d] \\
+K \arrow[r]
+& K \otimes_{\mathbb{C}}B
+\end{tikzcd}
+\end{center}
+The unique lift of $\eta$ to fulfill the valuative criterion of properness can be given by $\lambda$ in the following diagram
+\begin{center}
+\begin{tikzcd}
+V \arrow[r] \arrow[d]
+& V \otimes_{\mathbb{C}}A \arrow[d]\arrow[r, "\iota"] & V \otimes_{\mathbb{C}}B\arrow[ld, "\lambda"]\\
+K \arrow[r]
+& K \otimes_{\mathbb{C}}B
+\end{tikzcd}
+\end{center}
+where $\iota: V \otimes_{\mathbb{C}}A \to R \otimes_{\mathbb{C}}B$ is the canonical inclusion of the ring $R \otimes_{\mathbb{C}}A$ as a trivial $V \otimes_{\mathbb{C}}A[\Gamma]$-module into the regular $\Gamma$-module $V \otimes_{\mathbb{C}}B$ over $V \otimes_{\mathbb{C}}A$.
+\end{proof}
+\end{lemma}
+
+
+For each integer $m \geq 0$, denote by $S_m$ the vector space of homogeneous polynomials in $x, y$ of degree $m$. Since the $\Gamma$-action on $S$ is linear, the space $S_m$ is a $\mathbb{C}[\Gamma]$-module for all $m$. Denote by $s_{m, i}$ the multiplicity of $\rho_i$ in $S_m$. In the following lemma, we calculate the multiplicities $s_{m, i}$ for any $\Gamma$.
+
+
+\begin{lemma}\label{equivhilbfunc} 
+Notations as above.
+\begin{enumerate}
+\item If $\Gamma$ is a cyclic group of order $n + 1$ and $n$ is odd, then 
+\[
+s_{m, 0} = 
+\begin{cases} 
+2 [\frac{m}{n + 1}] + 1 & \textrm{if $m$ is even} \\
+0 & \textrm{if $m$ is odd}
+\end{cases}
+\]
+\[
+s_{m, 1} = s_{m, n} = 
+\begin{cases} 
+2[\frac{m}{n + 1}] + 1 & \textrm{if $m \equiv 1, 3, \dots, n - 2 (\mod n + 1)$ } \\
+2[\frac{m}{n + 1}] + 2 & \textrm{if $m \equiv n (\mod n + 1)$ } \\
+0 & \textrm{if $m$ is even}
+\end{cases}
+\]
+For $1 < i < n - i$ and $i$ even,
+\[
+s_{m, i} = s_{m, n - i} = 
+\begin{cases} 
+2 [\frac{m}{n + 1}] & \textrm{if $m \equiv 0, 2, \dots, i - 2 (\mod n + 1)$ } \\
+2 [\frac{m}{n + 1}] + 1 & \textrm{if $m \equiv i, i + 2, \dots, n - i - 1(\mod n + 1)$ } \\
+2 [\frac{m}{n + 1}] + 2 & \textrm{if $m \equiv n - i + 1, n - i + 3, \dots, n(\mod n + 1)$ } \\
+0 & \textrm{if $m$ is odd}
+\end{cases}
+\]
+For $1 < i < n - i$ and $i$ odd,
+\[
+s_{m, i} = s_{m, n - i} = 
+\begin{cases} 
+2 [\frac{m}{n + 1}] & \textrm{if $m \equiv 1, 3, \dots, i - 2 (\mod n + 1)$ } \\
+2 [\frac{m}{n + 1}] + 1 & \textrm{if $m \equiv i, i + 2, \dots, n - i - 1(\mod n + 1)$ } \\
+2 [\frac{m}{n + 1}] + 2 & \textrm{if $m \equiv n - i + 1, n - i + 3, \dots, n (\mod n + 1)$ } \\
+0 & \textrm{if $m$ is even}
+\end{cases}
+\]
+\item If If $\Gamma$ is a cyclic group of order $n + 1$ and $n$ is even, then 
+\[
+s_{m, 0} = 
+\begin{cases} 
+ [\frac{m}{n + 1}] + 1 & \textrm{if $m$ is even}\\
+ [\frac{m}{n + 1}]  & \textrm{if $m$ is odd}
+\end{cases}
+\]
+For $0 < i \leq n - i$,
+\[
+s_{m, i} = s_{m, n - i} = 
+\begin{cases} 
+ [\frac{m}{n + 1}] + 1 &  \textrm{if $m \equiv i, i + 2, \dots, n - i, n - i + 1, \dots, n - 1, n (\mod n + 1)$}  \\
+ [\frac{m}{n + 1}]  & \textrm{if $m \equiv 0, 1, \dots, i - 1, i + 1, \dots, n - i - 1(\mod n + 1)$} 
+\end{cases}
+\]
+\item If $\Gamma$ is a binary dihedral group of order $4n$ and $n$ is even, then
+\[
+s_{m, 2} = 
+\begin{cases} 
+2 [\frac{m}{2n - 4}] + 2 & \textrm{if $m \equiv 2n - 5 (\mod 2n - 4)$ } \\
+2 [\frac{m}{2n - 4}] + 1 & \textrm{if $m \equiv 2k + 1(\mod 2n - 4)$ } \\
+0 & \textrm{if $m$ is even}
+\end{cases}
+\]
+for $0 \leq k \leq n - 4$.
+
+For $3 \leq q \leq n - 3$ and $q$ odd,
+\[
+s_{m, q} = 
+\begin{cases} 
+2 [\frac{m}{2n - 4}] + 2 & \textrm{if $m \equiv 2j (\mod 2n - 4)$ } \\
+2 [\frac{m}{2n - 4}] + 1 & \textrm{if $m \equiv 2l (\mod 2n - 4)$ } \\
+2 [\frac{m}{2n - 4}] & \textrm{if $m \equiv 2k (\mod 2n - 4)$ } \\
+0 & \textrm{if $m$ is odd}
+\end{cases}
+\]
+for $0 \leq k \leq (q - 3)/2$, $(q - 1)/2 \leq l \leq n - (q + 5)/2$, and $n - (q + 3)/2 \leq j \leq n - 3$.
+
+For $4 \leq q \leq n - 2$ and $q$ even,
+\[
+s_{m, q} = 
+\begin{cases} 
+2 [\frac{m}{2n - 4}] + 2 & \textrm{if $m \equiv 2j + 1 (\mod 2n - 4)$ } \\
+2 [\frac{m}{2n - 4}] + 1 & \textrm{if $m \equiv 2l + 1 (\mod 2n - 4)$ } \\
+2 [\frac{m}{2n - 4}] & \textrm{if $m \equiv 2k + 1 (\mod 2n - 4)$ } \\
+0 & \textrm{if $m$ is even}
+\end{cases}
+\]
+for $0 \leq k \leq (q - 4)/2$, $(q - 2)/2 \leq l \leq n - (q + 4)/2$, and $n - (q + 2)/2 \leq j \leq n - 2$.
+\item If $\Gamma$ is a binary dihedral group of order $4n + 4$ and $n$ is odd, then
+\[
+s_{m, 0} = 
+\begin{cases} 
+2 [\frac{m}{4n - 8}] + 2 & \textrm{if $m \equiv 4j (\mod 4n - 8)$ } \\
+2 [\frac{m}{4n - 8}] + 1 & \textrm{if $m \equiv 4k$ or $4j - 2 (\mod 4n - 8)$ } \\
+2 [\frac{m}{4n - 8}] & \textrm{if $m \equiv 4k + 2 (\mod 4n - 8)$ } \\
+0 & \textrm{if $m$ is odd}
+\end{cases}
+\]
+for $0 \leq k \leq (n - 3)/2$ and $(n - 1)/2 \leq j \leq n - 2$.
+\[
+s_{m, 1} = 
+\begin{cases} 
+2 [\frac{m}{4n - 8}] + 2 & \textrm{if $m \equiv 4j - 2 (\mod 4n - 8)$ } \\
+2 [\frac{m}{4n - 8}] + 1 & \textrm{if $m \equiv 4k + 2$ or $4l (\mod 4n - 8)$ } \\
+2 [\frac{m}{4n - 8}] & \textrm{if $m \equiv 4p (\mod 4n - 8)$ } \\
+0 & \textrm{if $m$ is odd}
+\end{cases}
+\]
+for $0 \leq k \leq (n - 5)/2$, $0 \leq p \leq (n - 1)/2$, $(n - 1)/2 \leq l \leq n - 3$, and $(n - 1)/2 \leq j \leq n - 2$.
+\[
+s_{m, n - 1} = s_{m, n} =
+\begin{cases} 
+[\frac{m}{2n - 4}] + 1 & \textrm{if $m \equiv 2k + 1 (\mod 2n - 4)$ } \\
+[\frac{m}{2n - 4}] & \textrm{if $m \equiv 2j + 1 (\mod 2n - 4)$ } \\
+0 & \textrm{if $m$ is even}
+\end{cases}
+\]
+for $(n - 3)/2 \leq k \leq n - 2$ and $0 \leq j \leq (n - 5)/2$.
+\item If If $\Gamma$ is a binary dihedral group of order $4n + 4$ and $n$ is even, then
+\[
+s_{m, 0} = 
+\begin{cases} 
+[\frac{m}{2n - 4}] + 1 & \textrm{if $m \equiv 4k (\mod 2n - 4)$ } \\
+[\frac{m}{2n - 4}] & \textrm{if $m \equiv 4k + 2 (\mod 2n - 4)$ } \\
+0 & \textrm{if $m$ is odd}
+\end{cases}
+\]
+for $0 \leq k \leq n/2 - 2$.
+\[
+s_{m, 1} = 
+\begin{cases} 
+[\frac{m}{2n - 4}] + 1 & \textrm{if $m \equiv 4k + 2 (\mod 2n - 4)$ } \\
+[\frac{m}{2n - 4}] & \textrm{if $m \equiv 4k (\mod 2n - 4)$ } \\
+0 & \textrm{if $m$ is odd}
+\end{cases}
+\]
+for $0 \leq k \leq n/2 - 4$.
+\[
+s_{m, n - 1} = s_{m, n} =
+\begin{cases} 
+[\frac{m}{2n - 4}] & \textrm{if $m \equiv 2k (\mod 2n - 4)$ } \\
+[\frac{m}{2n - 4}] + 1 & \textrm{if $m \equiv 2j (\mod 2n - 4)$ } \\
+0 & \textrm{if $m$ is odd}
+\end{cases}
+\]
+for $0 \leq k \leq (n - 4)/2$ and $(n - 2)/2 \leq j \leq n - 3$.
+\item If $\Gamma$ is a binary tetrahedral group, then
+\[
+s_{m, 0} = \begin{cases} 
+[\frac{m}{12}] & \textrm{if $m \equiv 2, 4, 10 (\mod 12)$ } \\
+[\frac{m}{12}] + 1 & \textrm{if $m \equiv 0, 6, 8 (\mod 12)$ } \\
+0 & \textrm{if $m$ is odd}
+\end{cases}
+\]
+\[
+s_{m, 1} = s_{m, 5} = \begin{cases} 
+[\frac{m}{12}] & \textrm{if $m \equiv 0, 2, 6 (\mod 12)$ } \\
+[\frac{m}{12}] + 1 & \textrm{if $m \equiv 4, 8, 10 (\mod 12)$ } \\
+0 & \textrm{if $m$ is odd}
+\end{cases}
+\]
+\[
+s_{m, 2} = s_{m, 4} = \begin{cases} 
+[\frac{m}{6}] & \textrm{if $m \equiv 1 (\mod 6)$ } \\
+[\frac{m}{6}] + 1 & \textrm{if $m \equiv 3, 5 (\mod 6)$ } \\
+0 & \textrm{if $m$ is even}
+\end{cases}
+\]
+\[
+s_{m, 3} = \begin{cases} 
+\frac{m + 2}{4} & \textrm{if $m \equiv 2 (\mod 4)$ } \\
+\frac{m}{4} & \textrm{if $m \equiv 0 (\mod 4)$ } \\
+0 & \textrm{if $m$ is odd}
+\end{cases}
+\]
+\[
+s_{m, 6} = \begin{cases} 
+[\frac{m}{6}] & \textrm{if $m \equiv 3 (\mod 6)$ } \\
+[\frac{m}{6}] + 1 & \textrm{if $m \equiv 1, 5 (\mod 6)$ } \\
+0 & \textrm{if $m$ is even}
+\end{cases}
+\]
+\item If $\Gamma$ is a binary octahedral group, then 
+\[
+s_{m, 0} = \begin{cases} 
+[\frac{m}{24}] & \textrm{if $m \equiv 2, 4, 6, 10, 14, 22 (\mod 24)$ } \\
+[\frac{m}{24}] + 1 & \textrm{if $m \equiv 0, 8, 12, 16, 18, 20 (\mod 24)$ } \\
+0 & \textrm{if $m$ is odd}
+\end{cases}
+\]
+\[
+s_{m, 1}  = \begin{cases} 
+2[\frac{m}{24}] & \textrm{if $m \equiv 3, 5 (\mod 24)$ } \\
+2[\frac{m}{24}] + 1 & \textrm{if $m \equiv 1, 7, 9, 11, 13, 15, 21 (\mod 24)$ } \\
+2[\frac{m}{24}] + 2 & \textrm{if $m \equiv 17, 19, 23 (\mod 24)$ } \\
+0 & \textrm{if $m$ is even}
+\end{cases}
+\]
+\[
+s_{m, 2}  = \begin{cases} 
+[\frac{m}{8}] & \textrm{if $m \equiv 0, 4 (\mod 8)$ } \\
+[\frac{m}{8}] + 1 & \textrm{if $m \equiv 2, 6 (\mod 8)$ } \\
+0 & \textrm{if $m$ is odd}
+\end{cases}
+\]
+\[
+s_{m, 3}  = \begin{cases} 
+[\frac{m}{6}] & \textrm{if $m \equiv 1 (\mod 6)$ } \\
+[\frac{m}{6}] + 1 & \textrm{if $m \equiv 3, 5 (\mod 6)$ } \\
+0 & \textrm{if $m$ is even}
+\end{cases}
+\]
+\[
+s_{m, 4} = \begin{cases} 
+[\frac{m}{12}] & \textrm{if $m \equiv 0, 2, 6 (\mod 12)$ } \\
+[\frac{m}{12}] + 1 & \textrm{if $m \equiv 4, 8, 10 (\mod 12)$ } \\
+0 & \textrm{if $m$ is odd}
+\end{cases}
+\]
+\[
+s_{m, 5} = \begin{cases} 
+[\frac{m}{8}] & \textrm{if $m \equiv 0, 2 (\mod 8)$ } \\
+[\frac{m}{8}] + 1 & \textrm{if $m \equiv 4, 6 (\mod 8)$ } \\
+0 & \textrm{if $m$ is odd}
+\end{cases}
+\]
+\[
+s_{m, 6} = \begin{cases} 
+2[\frac{m}{24}] & \textrm{if $m \equiv 1, 3, 9 (\mod 24)$ } \\
+2[\frac{m}{24}] + 1 & \textrm{if $m \equiv 5, 7, 11, 15, 17 (\mod 24)$ } \\
+2[\frac{m}{24}] + 2 & \textrm{if $m \equiv 13, 19, 21, 23 (\mod 24)$ } \\
+0 & \textrm{if $m$ is even}
+\end{cases} 
+\]
+\[
+s_{m, 7} = \begin{cases} 
+[\frac{m}{24}] & \textrm{if $m \equiv 0, 2, 4, 8, 10, 16 (\mod 24)$ } \\
+[\frac{m}{24}] + 1 & \textrm{if $m \equiv 6, 12, 14, 18, 20, 22 (\mod 24)$ } \\
+0 & \textrm{if $m$ is odd}
+\end{cases}
+\]
+\item If $\Gamma$ is a binary icosahedral group, then
+\[
+s_{m, 0} = \begin{cases} 
+[\frac{m}{60}] + 1 & \textrm{if $m \equiv 0, 12, 20, 22, 24, 30, 32, 36, 40, 42, 44, 48, 50, 52, 54, 56 (\mod 60)$ } \\
+[\frac{m}{60}] & \textrm{if $m \equiv 2, 4, 6, 8, 10, 14, 16, 18, 26, 28, 34, 38, 46, 58 (\mod 60)$ } \\
+0 & \textrm{if $m$ is odd}
+\end{cases}
+\]
+\[
+s_{m, 1}  = \begin{cases} 
+[\frac{m}{30}] & \textrm{if $m \equiv 3, 5, 7, 9, 15, 17, 27 (\mod 30)$ } \\
+[\frac{m}{30}] + 1 & \textrm{if $m \equiv 1, 11, 13, 19, 21, 23, 25, 29 (\mod 30)$ } \\
+0 & \textrm{if $m$ is even}
+\end{cases}
+\]
+\[
+s_{m, 2}  = \begin{cases} 
+[\frac{m}{20}] & \textrm{if $m \equiv 0, 4, 6, 8,16 (\mod 20)$ } \\
+[\frac{m}{20}] + 1 & \textrm{if $m \equiv 2, 10, 12, 14, 18 (\mod 20)$ } \\
+0 & \textrm{if $m$ is odd}
+\end{cases}
+\]
+\[
+s_{m, 3}  = \begin{cases} 
+2[\frac{m}{30}] & \textrm{if $m \equiv 1, 5, 7 (\mod 30)$ } \\
+2[\frac{m}{30}] + 1 & \textrm{if $m \equiv 3, 9, 11, 13, 15, 17, 19, 25 (\mod 30)$ } \\
+2[\frac{m}{30}] + 2 & \textrm{if $m \equiv 21, 23, 27, 29 (\mod 30)$ } \\
+0 & \textrm{if $m$ is even}
+\end{cases}
+\]
+\[
+s_{m, 4}  = \begin{cases} 
+[\frac{m}{12}] & \textrm{if $m \equiv 0, 2, 6 (\mod 12)$ } \\
+[\frac{m}{12}] + 1 & \textrm{if $m \equiv 4, 8, 10 (\mod 12)$ } \\
+0 & \textrm{if $m$ is odd}
+\end{cases}
+\]
+\[
+s_{m, 5}  = \begin{cases} 
+[\frac{m}{10}] & \textrm{if $m \equiv 1, 3 (\mod 10)$ } \\
+[\frac{m}{10}] + 1 & \textrm{if $m \equiv 5, 7, 9 (\mod 10)$ } \\
+0 & \textrm{if $m$ is even}
+\end{cases}
+\]
+\[
+s_{m, 6}  = \begin{cases} 
+[\frac{m}{20}] & \textrm{if $m \equiv 0, 2, 4, 8, 12 (\mod 20)$ } \\
+[\frac{m}{20}] + 1 & \textrm{if $m \equiv 6, 10, 14, 16, 18 (\mod 20)$ } \\
+0 & \textrm{if $m$ is odd}
+\end{cases} 
+\]
+\[
+s_{m, 7} = \begin{cases} 
+2[\frac{m}{30}] & \textrm{if $m \equiv 0, 2, 4, 10 (\mod 30)$ } \\
+2[\frac{m}{30}] + 1 & \textrm{if $m \equiv 6, 8, 12, 14, 16, 20, 22 (\mod 30)$ } \\
+2[{\frac{m}{30}}] + 2 & \textrm{if $m \equiv 18, 24, 26, 28 (\mod 30)$ } \\
+0 & \textrm{if $m$ is odd}
+\end{cases} 
+\]
+\[
+s_{m, 8}  = \begin{cases} 
+[\frac{m}{30}] & \textrm{if $m \equiv 1, 3, 5, 9, 11, 15, 21 (\mod 30)$ } \\
+[\frac{m}{30}] + 1 & \textrm{if $m \equiv 7, 13, 17, 19, 23, 25, 27, 29 (\mod 30)$ } \\
+0 & \textrm{if $m$ is even}
+\end{cases}
+\]
+\end{enumerate}
+\begin{proof}
+Denote by $\rho_{nat}$ the two-dimensional natural representation given by $S_1$. There is the isomorphism of $\mathbb{C}[\Gamma]$-modules $S_m \otimes \rho_{nat} \cong S_{m - 1} \oplus S_{m + 1}$ for any $m \in \mathbb{Z}_+$. The Auslander-Reiten sequence of reflexive $R$-modules $0 \to M_i \to E(M_i) \to M_i \to 0$
+implies that there is an isomorphism $\rho_i \otimes \rho_{nat} \cong \bigoplus_{j \textrm{ adjacent to }i} \rho_j$, where the summation on the right takes over all representations adjacent to $\rho_i$ in the affine Dynkin diagram of $\Gamma$. The multiplicity calculation follows from chasing the Dynkin diagrams and induction on $m$. 
+\end{proof}
+\end{lemma}
+
+Suppose $I$ is an ideal of $R$. Denote by $\tilde{I}$ the greatest ideal (with respect to ideal inclusion) of $S$ whose contraction to $R$ is $I$.
+\begin{cor}\label{maximalideal}
+For any integer $l \geq 1$, there is a decomposition of $\mathbb{C}[\Gamma]$-modules
+\[
+\widetilde{\mathfrak{m}^l}/(\mathfrak{m}^l)^e \cong \bigoplus_{i = 1}^n \mathbb{C}[\rho_i]^{\oplus 2l \cdot \mathrm{rk}\, \rho_i}.
+\]
+\end{cor}
+\begin{rmk}
+The special case where $l = 1$ is \cite[Theorem 10.5.1]{IN99}, which is proven by case-by-case analysis for each singularity type (see \cite[Theorem 12.4, Table 7, 8, 10, 13, 14, 17, 18]{IN99}). Except for the cyclic group case ($A_n$ singularities) being proven in Theorem 12.4, other cases are enumerated in those tables. Ito and Nakamura prove much more than computing the multiplicities of the irreducible representations, and they provide a complete list of bases of those $\mathbb{C}[\Gamma]$-modules.
+\end{rmk}
+\begin{proof}
+Let us assume $l \geq 2$. First we note that for each irreducible representation $\rho_i$, there is an isomorphism of $\mathbb{C}[\Gamma]$-modules 
+\[
+\widetilde{\mathfrak{m}^l}/(\mathfrak{m}^l)^e[\rho_i] \cong \mathfrak{m}^{l - 1} M_i / \mathfrak{m}^l M_i,
+\]
+where $M_i$ is the reflexive $R$-module corresponding to $\rho_i$. In fact, a summand of $\mathbb{C}[\rho_i]$ appears in $\widetilde{\mathfrak{m}^l}/(\mathfrak{m}^l)^e$ if and only if it is contained in $(\mathfrak{m}^{l - 1})^e$. In particular, $[\widetilde{\mathfrak{m}^l}/(\mathfrak{m}^l)^e : \rho_i] \cdot \mathrm{rk} \, \rho_i = \dim \mathfrak{m}^{l - 1} M_i / \mathfrak{m}^l M_i$. Hence to find the desired decomposition it suffices to compute the Hilbert series of each indecomposable reflexive $R$-module. 
+\end{proof}
+
+
+\begin{lemma}\label{homog}
+Suppose $I$ is an ideal of $R$ of finite colength, and $\mathrm{gr}(I)$ is the associated graded ideal of $I$. Then $[S/I^e : \rho_i] = [S/\mathrm{gr}(I)^e : \rho_i]$ for any irreducible representation $\rho_i \in \mathcal{M}_1$.
+\begin{proof}
+This follows from \cite[Lemma 9.4]{IN99}. An ideal $I$ of $R$ is specialized to its graded ideal via a proper chosen $\mathbb{C}^{*}$-action on $S$ restricted to $R$. That is, there is a connected reduced affine scheme $T$ which parametrizes ideals of $R$ that is flat over $T$ such that $I$ and $\mathrm{gr}(I)$ are two closed fibers. Then the Artinian rings $S/I^e$ and $S/\mathrm{gr}(I)^e$ are isomorphic as $\Gamma$-representations. In particular, the multiplicities of each irreducible representation in $S/I^e$ and $S/\mathrm{gr}(I)^e$ are equal. 
+\end{proof}
+\end{lemma}
+
+Suppose $I$ is an ideal of $R$ of finite colength. For $\rho_i \in \mathcal{M}_1$ and $n \geq 0$, we call the finite sequence of numbers $[(S/I^e) \cap \mathfrak{M}^n/(S/I^e) \cap \mathfrak{M}^{n + 1} : \rho_i]$ the \textit{equivariant local Hilbert function} of $I$ with respect to $\rho_i$. Moreover, if $I$ is homogeneous, we denote by $(S/I^e)_m$ ($I^e_m$, resp.) the space of the degree $m$ summand of $S/I^e$ ($I^e$, resp.) for $m \geq 0$.
+
+\begin{lemma}
+Suppose $I$ is a complete intersection homogeneous ideal of $R$ of colength $d$. Then $[S/I^e : \rho_i] = d \cdot \mathrm{rk}\, \rho_i$ for any $\rho_i \in \mathcal{M}_1$.
+\begin{proof}
+It suffices to show $\sum_{m \geq 0}[(S/I^e)_m : \rho_i] = d \cdot \mathrm{rk}\, \rho_i$ for any $\rho_i \in \mathcal{M}_1$. 
+
+Suppose $I = \langle f, g \rangle$, and $\deg f = a, \deg g = b$ with $a \leq b$. Then $(S/I^e)_m = S_m$ for $m \leq a - 1$. For $i = 1, \dots, n$ and $m \geq 0$, 
+\[
+[I^e_m : \rho_i] = \begin{cases} 
+s_{i, m - a} & \textrm{if $a \leq m < b$} \\
+s_{i, m - a} + s_{i, m - b} & \textrm{if $b \leq m < a + b$ } \\
+s_{i, m} & \textrm{if $m \geq a + b$}
+\end{cases}
+\]
+The lemma follows from the calculations in Lemma \ref{equivhilbfunc}.
+\end{proof}
+\end{lemma}
+
+\begin{prop}\label{multiplicity}
+Suppose $I$ is an ideal of $R$ of colength $d$ that extends to the ideal $I^e$ of $S$. Then $[S/I^e: \rho_i] \geq d \cdot \mathrm{rk}\, \rho_i$ for any $\rho_i \in \mathcal{M}_1$.
+\begin{proof}
+By Lemma \ref{homog}, it suffices to prove the proposition when $I$ is a homogeneous ideal of $R$. Suppose $\{f_1, \dots, f_s\}$ is a minimal set of homogeneous generators of $I$ with $\deg f_j = a_j$ for $j = 1, \dots, s$. Without loss of generality, we assume that $a_1 \leq a_2 \leq \dots \leq a_s$. By the Hilbert-Burch theorem, the minimal $S$-free resolution of $I^e$ has the form $0 \to S^{\oplus s - 1} \xrightarrow{\Psi} S^{\oplus s} \xrightarrow{f_1, \dots, f_s} I^e \to 0$, and $f_1, \dots, f_s$ are the maximal minors of the matrix $\Psi$. Since the ideal $I^e$ is $\Gamma$-invariant, the free $S$-module $S^{\oplus s - 1}$ in the preceding sequence is projective as an $S[\Gamma]$-module. 
+
+The monomials in $S$ can be endowed with a monomial order such that the relations between the generators $f_1, \dots, f_s$ are in the standard form. To calculate the multiplicities $[S/I^e: \rho_i]$ we need to understand the syzygy module as an $S[\Gamma]$-module. Suppose the syzygy $S^{\oplus s - 1}$ decomposes as $S^{\oplus s - 1} = \oplus_{i = 0}^n P_i^{\oplus b_i}$ for some integers $b_i$, where $P_i$ are the iso-classes of indecomposable projective $S[\Gamma]$-modules. 
+
+\end{proof}
+\end{prop}
+
+\begin{proof}[Proof of Theorem \ref{crepant}]
+By Lemma \ref{proper} and \ref{multiplicity}, it follows that the quotient scheme morphism is proper, birational, and surjective. Composing $f$ with the Hilbert-Chow morphism, we obtain a crepant resolution $h \circ f: \mathrm{Hilb}^d([\mathbb{A}^2/\Gamma]) \to \mathrm{Sym}^d(X)$ of the $d$-fold symmetric product of $X$. Then it is easy to see that $f$ is crepant. 
+\end{proof}
+
+\begin{cor}\label{singularloci}
+Let $Z$ be a length $d$ subscheme of the surface $X$ with only Kleinian singularities, and let $I_Z$ be the ideal sheaf of $Z$ on $X$. Then $\mathrm{Hilb}^d(X)$ is smooth at $[Z]$ if and only if $I_Z$ has finite projective dimension on $X$.
+\end{cor}
+
+\begin{proof}
+The direction of sufficiency is known. To prove necessity, we need to show that if $Z$ does not have finite projective dimension over $X$, the dimension of the Zariski tangent space $T_{[Z]}\mathrm{Hilb}^d(X)$ is larger than $2d$. We are reduced to the case where $(X = \mathrm{Spec}(R), p)$ is a Kleinian singularity and $Z$ is supported at the closed point $p$. Let $\Gamma$ be the group associated to $R$. 
+
+Suppose the presentation of the ideal $I_Z$ is
+\begin{equation}\label{presenideal}
+0 \to \mathrm{Syz}_1(I_Z) \xrightarrow{\Phi} R^{\oplus r + 1} \to I_Z \to 0,
+\end{equation}
+with $\mathrm{Syz}_1(I_Z) = R^{\oplus a} \oplus \left(\bigoplus_{i = 1}^nM_i^{\oplus a_i}\right)$ for some non-negative integers $a_1, \dots, a_n$ with $a_i > 0$ for some $i$. There is an exact sequence of $S[\Gamma]$-modules lifting (\ref{presenideal}) to $S$:
+\begin{equation}\label{extension}
+0 \to \mathrm{Syz}_{1}^S(I_{Z'}) \xrightarrow{\Phi'} S^{\oplus r + 1} \to S \to \mathcal{O}_{Z'} \to 0,
+\end{equation}
+where $Z'$ is the zero-dimensional subscheme of $\mathrm{Spec}(S)$ defined by the extended ideal $I_Z^e$ and $\mathrm{Syz}_{1}^S(I_{Z'})$ is the syzygy $S$-module lifting $\mathrm{Syz}_1(I_Z)$, which is a free $S$-module, and (\ref{extension}) is a free resolution of $Z'$. The sequence (\ref{extension}) respects the $\Gamma$-action: the Artinian algebra $\mathcal{O}_{Z'}$ is a $\mathbb{C}[\Gamma]$-module, and (\ref{extension}) is a projective $S[\Gamma]$-resolution of the $\mathbb{C}[\Gamma]$-module $\mathcal{O}_{Z'}$. 
+
+Note that $\mathrm{Syz}_1(I_Z)$ is not a free $R$-module if and only if the map $\Phi$ in (\ref{presenideal}) is not $\Gamma$-invariant, in turn if and only if the sequence (\ref{extension}) is not $\Gamma$-invariant. Proposition \ref{multiplicity} implies that the $d$-fold regular $\Gamma$-representation of is a strictly proper sub-$\mathbb{C}[\Gamma]$-module of $\mathcal{O}_{Z'}$. In particular, the length of $Z'$ is strictly greater than $d \cdot \vert \Gamma \vert$, $\dim \mathrm{Hom}_S(I_{Z}^e, \mathcal{O}_{Z'}) > 2d \cdot \vert \Gamma \vert$, and $[\mathcal{O}_{Z'}: \rho_i] > d \cdot \mathrm{rk}\,M_i$ for some $i$. 
+
+Lastly, we note that $\mathrm{Hom}_S(I_{Z}^e, \mathcal{O}_{Z'})$ is a finite-dimensional $\mathbb{C}[\Gamma]$-module whose $\Gamma$-invariant component is precisely $\mathrm{Hom}_R(I_{Z}, \mathcal{O}_{Z})$. An $S$-linear morphism $\phi \in \mathrm{Hom}_S(I_{Z}^e, \mathcal{O}_{Z'})$ is $\Gamma$-invariant if and only if it maps the summand of $\rho_i$ in $I_{Z}^e$ into the summand of $\rho_i$ in $\mathcal{O}_{Z'}$ for each irreducible $\Gamma$-representation $\rho_i$. If $[\mathcal{O}_{Z'}: \rho_i] > d \cdot \mathrm{rk} \,M_i$ for some $i \neq 0$, then $\dim \mathrm{Hom}_R(I_{Z}, \mathcal{O}_{Z}) > 2d$. 
+\end{proof}
+
+We call the composite $\pi_d = h \circ f: \mathrm{Hilb}^d([\mathbb{A}^2/\Gamma]) \to \mathrm{Sym}^d(X)$ the \textit{equivariant Hilbert-Chow morphism}. It is well-known that $\pi_d$ is a crepant semi-small resolution of singularities. We denote by $\underline{0}^d \in \mathrm{Sym}^d(X)$ the zero-cycle of multiplicity $d$ supported at the singularity $0 \in X$, and by $\mathrm{Hilb}^d(X, 0)$ the \textit{punctual Hilbert scheme at $0$}, parameterizing length $d$ subschemes of $X$ which are supported at $0$, i.e., the pre-image $h^{-1}(\underline{0}^d)$. 
+
+\begin{cor}\label{semismall}
+Notations follow before. 
+\begin{itemize}
+\item[1.] The Hilbert scheme $\mathrm{Hilb}^d(X)$ has only rational singularities for any $d$.
+\item[2.] The punctual Hilbert scheme $\mathrm{Hilb}^d(X, 0)$ has dimension at most $d$ for any $d$.
+\item[3.] The quotient scheme morphism $f: \mathrm{Hilb}^{\rho}([\mathbb{C}^2/\Gamma]) \to \mathrm{Hilb}^d(X)$ is semismall.
+\item[4.] A locally closed integral sub-algebraic set $Z$ of $\mathrm{Hilb}^{d}(X)$ is relevant with respect to the quotient scheme morphism $f$ if and only if the Hilbert-Chow morphism $h$ restricted to $Z$ is finite, and if and only if $h(Z)$ is relevant with respect to the composite $\pi_d = h \circ f$.
+\end{itemize}
+\begin{proof}
+1. Since $\mathrm{Hilb}^{\rho}([\mathbb{C}^2/\Gamma])$ is a symplectic resolution of $\mathrm{Sym}^d(X)$ the Hilbert scheme $\mathrm{Hilb}^d(X)$ also has symplectic singularities. One can see that the symplectic form on the regular locus of $\mathrm{Sym}^d(X)$ lifts to a symplectic form on its pre-image under the Hilbert-Chow morphism to an open dense subset of $\mathrm{Hilb}^d(X)$. In particular, $\mathrm{Hilb}^d(X)$ has only rational singularities. 
+
+2. The punctual Hilbert scheme $\mathrm{Hilb}^d(X, 0)$ is dominated by the equivariant punctual Hilbert scheme $\mathrm{Hilb}^{\rho}([\mathbb{C}^2/\Gamma], 0)$, which maps to the zero-cycle $\underline{0}^d$ of multiplicity $d$ at the singularity of $X$. By the semismallness of the equivariant Hilbert-Chow morphism, we see that $\mathrm{Hilb}^{\rho}([\mathbb{C}^2/\Gamma], 0)$ has dimension $d$. Hence $\mathrm{Hilb}^d(X, 0)$, not necessarily equidimensional, has dimension at most $d$ for each component.
+
+3. Let $k$ be a positive integer, and let $Y_k$ be a closed irreducible subvariety of $\mathrm{Hilb}^d(X)$ over which the quotient scheme map has constant fiber dimension $k$. The fiber over $Y_k$ being positive-dimensional requires that the subschemes parameterized by $Y_k$ have positive multiplicities at the singular point of $X$. Stratify $Y_k$ as $Y_k = \bigcup_{i \geq 1}Y_{k, i}$ where $Y_{k, i}$ is the locus parameterizing subschemes of $X$ with multiplicity $i$ at the singularity. One further stratifies, if necessary, each $Y_{k, i}$ based on the fiber dimension of the usual Hilbert-Chow morphism from $\mathrm{Hilb}^d(X)$ to $\mathrm{Sym}^d(X)$, which is determined by the number of points in the support of the images and the multiplicities at each support. Let $Y_{k, i, l} \subseteq Y_{k, i}$ be such a locally closed subscheme of $\mathrm{Hilb}^d(X)$ which maps to $\mathrm{Sym}^d(X)$ with constant fiber dimension $a_k$. Then by the semismallness of the $\pi_d$, we have the inequality 
+\[
+k \leq \dfrac{1}{2}(2d - (\dim Y_{k, i, l} - a_k)) - a_k = \dfrac{1}{2}(2d - \dim Y_{k, i, l} - a_k) \leq \dfrac{1}{2}(2d - \dim Y_{k, i, l}).
+\]
+Hence the statement.
+
+4. Suppose $Y_{k, j}$ is a $k$-dimensional integral subscheme of $\mathrm{Hilb}^{d}(X)$ such that the Hilbert-Chow morphism $h$ has relative dimension $j$ on $Y_{k, j}$. In particular, $h(Y_{k, j})$ is $(k - j)$-dimensional in $\mathrm{Sym}^d(X)$. By the semismallness of $\pi_d$, we have 
+\[
+\dim (\textrm{Fiber over } Y_{k, j} \textrm{ of } f) + j \leq \dfrac{1}{2}(2d - (k - j))
+\]
+i.e., $\dim (\textrm{Fiber over } Y_{k, j} \textrm{ of } f) \leq d - (k + j)/2$. Then $Y_{k, j}$ is relevant if and only if $\dim (\textrm{Fiber over } Y_{k, j} \textrm{ of } f) = d - k/2  \leq d - (k + j)/2$ in turn if and only if $j = 0$. 
+
+For the second part of the statement, we take a locally closed subset $Y_k$ of $\mathrm{Hilb}^{d}(X)$ of dimension $k$ such that $f$ has constant relative dimension over $Y_k$ and we further stratify $Y_k = \bigcup_j Y_{k, j}$ with respect to the fiber dimension of $h$ on $Y_k$ so that $h$ restricted to each $Y_{k, j}$ has constant fiber dimension $j$. Then by the preceding paragraph $Y_{k, j}$ is relevant with respect to $f$ if and only if $j = 0$, i.e., $h: Y_{k, j} \to h(Y_{k, j})$ is finite. So $Y_k$ is relevant with respect to $f$ if and only if $Y_k = Y_{k, 0}$. Then $Y_k$ is relevant with respect to $f$ if and only if $h(Y_k)$ is relevant with respect to $\pi_d$.
+\end{proof}
+\end{cor}
+
+\section{Quiver-theoretic interpretation of $\mathrm{Hilb}^{d}(X)$}
+
+Nakajima's quiver varieties provide a convenient framework to describe and study the quotient scheme morphism. Fix a singularity type, and denote the corresponding affine Dynkin diagram by $Q = (V, I)$, which consists of a set $V$ of vertices identified with the set $\{0, 1, \dots, n \}$ and a set of edges $\Omega$. The double quiver associated to $Q$ is the following quiver: Let the set of vertices be $V$. Assign to each edge $h \in \Omega$ an orientation so that $h$ becomes an arrow from one vertex to another. Denote by $\bar{h}$ the arrow $h$ with the reverse orientation, and by $\overline{\Omega} = \{ \bar{h} \mid h \in \Omega$ the set of all arrows with reverse orientation. Define the set of arrows of the double quiver to be the union $H = \Omega \cup \overline{\Omega}$. We also define the orientation function $\epsilon$ on $H$ which sends $h$ to $1$ for $h \in \Omega$ and $-1$ for $h \in \overline{\Omega}$. For an arrow $h \in H$, denote by $in (h)$ (resp., $out (h)$) the incoming (resp., outgoing) vertex of $h$.
+
+Choose and fix a $\Gamma$-representation $\rho$ which decomposes as $\rho = \bigoplus_{i = 0}^n \rho_i^{\oplus d_i}$. Let $\mathbf{V} = (V_0, \dots, V_n)$ be an $(n + 1)$-tuple of hermitian vector spaces such that $\dim_{\mathbb{C}} V_i = d_i \dim \rho_i$ for $i = 0, \dots, n$. The vector of dimensions of $\mathbf{V}$ is denoted by 
+\[
+\mathbf{v} = (d_0, d_1 \mathrm{rk}\, \rho_1, \dots, d_n \mathrm{rk}\, \rho_n).
+\]
+Let $W_0$ be another 1-dimensional hermitian vector space. There are the following two complex vector spaces
+\[
+\mathbf{M}_{\Omega}(\mathbf{v}, 1) = \bigoplus_{h \in \Omega} \mathrm{Hom} (V_{out (h)}, V_{in (h)}) \oplus  \mathrm{Hom} (W_{0}, V_0)
+\]
+\[
+\mathbf{M} = \mathbf{M}(\mathbf{v}, 1) = \bigoplus_{h \in H} \mathrm{Hom} (V_{out (h)}, V_{in (h)}) \oplus \mathrm{Hom} (W_{0}, V_0) \oplus \mathrm{Hom} (V_{0}, W_0)
+\]
+where $\mathbf{M}$ can be identified with the cotangent bundle of $\mathbf{M}_{\Omega}(\mathbf{v}, 1)$ and is considered as a hyperK\"ahler manifold. A point of $\mathbf{M}$ has the form $(B, i, j)$ where $B = (B_h)_{h \in H}$ for some linear maps $B_h: V_{out (h)} \to V_{in (h)}$, $i: W_0 \to V_0$, and $j: V_0 \to W_0$. The space $\mathbf{M}$ admits an action of the group $G_{\mathbf{v}} = \Pi_{i = 0}^n U(V_i)$ as follows. For $g = (g_i)_{i = 0}^n \in G_{\mathbf{v}}$ and $(B, i, j) \in \mathbf{M}$, we have
+\[
+g \cdot (B, i, j) \coloneqq (gBg^{-1}, g_0i, jg_0^{-1})
+\]
+where the components of the tuple $gBg^{-1}$ are $(g_{in (h)}B_hg_{out (h)}^{-1})_{h \in H}$. Let $\mathfrak{g}_{\mathbf{v}} = \bigoplus_{i = 0}^n \mathfrak{u}(V_i)$ be the Lie algebra of $G_{\mathbf{v}}$ and $\mathfrak{g}_{\mathbf{v}} \otimes \mathbb{C} = \bigoplus_{i = 0}^n \mathfrak{gl}(V_i)$ be its complexification. The $G_{\mathbf{v}}$-action preserves the hyperK\"ahler structure of $\mathbf{M}$ and there is the corresponding moment map $\mu = (\mu_{\mathbb{R}}, \mu_{\mathbb{C}}): \mathbf{M} \to (\mathfrak{g}^*_{\mathbf{v}}, \mathfrak{g}^*_{\mathbf{v}} \otimes \mathbb{C})$ as follows
+\[
+\mu_{\mathbb{R}} (B, i, j) = \dfrac{\sqrt{-1}}{2} \left( \sum_{in (h) = i} B_h B_h^{\dagger} - B_{\bar{h}}^{\dagger} B_{\bar{h}} + ii^{\dagger} - j^{\dagger}j\right)
+\]
+\[
+\mu_{\mathbb{C}} (B, i, j) = \sum_{in (h) = i} \epsilon(h)B_h B_{\bar{h}} + ij
+\]
+Using the canonical hermitian inner product, the cotangent space $\mathfrak{g}^*_{\mathbf{v}}$ can be identified with the tangent space $\mathfrak{g}_{\mathbf{v}}$, and the image of $\mu$ lies in $Z_{\mathbf{v}} \oplus Z_{\mathbf{v}} \otimes \mathbb{C} \cong Z_{\mathbf{v}} \otimes \mathbb{R}^3$, where $Z_{\mathbf{v}}$ is the center of $\mathfrak{g}_{\mathbf{v}}$. For an element $\zeta = (\zeta_{\mathbb{R}}, \zeta_{\mathbb{C}}) \in Z_{\mathbf{v}} \oplus Z_{\mathbf{v}} \otimes \mathbb{C}$, the quiver variety $\mathfrak{M}_{\zeta}(\mathbf{v}, 1)$ is the hyperK\"ahler quotient
+\[
+\mathfrak{M}_{\zeta} = \mathfrak{M}_{\zeta}(\mathbf{v}, 1) = \{(B, i, j) \mid \mu (B, i, j) = -\zeta\}/G_{\mathbf{v}}. 
+\]
+
+Denote by $Z_{\mathbf{v}}$ the center of $\mathfrak{g}_{\mathbf{v}}$, the product of the set of scalar matrices on $V_k$, and by $A$ the adjacency matrix of the graph. Let $C = 2I - A$ be the generalized Cartan matrix. The set of positive roots is denoted by $R_+ = \{\theta = (\theta_k) \mid \theta^t C \theta \leq 2\} \setminus \{0\}$. Also, denote by $R_+(\mathbf{v}) = \{\theta \in R_+ \mid \theta_k \leq \mathbf{v}_k, \forall k = 0, \dots, d - 1\}$, and by $D_\theta = \{x = (x_k) \in \mathbb{R}^d \mid \sum_k x_k \theta_k = 0\}$. The parameter $\zeta$ is said to be \textit{generic} (with respect to $\mathbf{v}$) if for any $\theta \in R_+(\mathbf{v})$ we have $\zeta \notin \mathbb{R}^3 \otimes D_\theta$.
+
+
+
+
+
+
+
+
+\begin{cor}
+Suppose $Z$ is a length $d$ subscheme of $X$ with ideal $I_Z$ and $Z'$ is the subscheme of $\mathrm{Spec}(S)$ defined by the extended ideal $I_Z^e$. The following are equivalent.
+\begin{itemize}
+\item[1.] The socle of $\mathcal{O}_{Z'}$ is generated by $\Gamma$-invariants.
+\item[2.] The length of $Z'$ is $d \vert \Gamma \vert$.
+\item[3.] The fiber of the quotient scheme morphism $f^{-1}([Z])$ consists of a unique point $[Z']$.
+\item[4.] The scheme $Z$ has finite projective dimension in $X$. 
+\end{itemize}
+\end{cor}
+
+
+\bibliographystyle{amsalpha}
+\begin{thebibliography}{00}
+
+\bibitem[CB01]{CB01}
+Crawley-Boevey, W. Geometry of the moment map for representations of quivers. \textit{Compositio Math.}, 126 (2001), 257-293.
+
+\bibitem[ES14]{ES14}
+Ekedahl, T. Skjelnes, R. Recovering the good component of the Hilbert scheme. \textit{Ann. Math.}, 179 (2014), 805-841.
+
+\bibitem[H98]{H98}
+Haiman, M. $t, q$-Catalan numbers and the Hilbert scheme, \textit{Discrete Math.}, 193 (1998), 201-224.
+
+\bibitem[H01]{H01}
+---------. Vanishing theorems and character formulas for the Hilbert scheme of points in the plane. \textit{Invent. Math.}, 149 (2001), 371-407.
+
+\bibitem[IN99]{IN99}
+Ito, Y., Nakamura, I. Hilbert schemes and simple singularities. \textit{London Mathematical Society Lecture Note Series} (1999), 151-234.
+
+\bibitem[K07]{K07}
+Kuznetsov, A. Quiver varieties and Hilbert schemes. \textit{Mosc. Math. J.}, 7 (2007), 673-697.
+
+\bibitem[Z17]{Z17}
+Zheng, X. The Hilbert schemes of points on surfaces with rational double point singularities. 1701.02435 [math.AG]
+
+
+\end{thebibliography}
+
+
+\end{document}

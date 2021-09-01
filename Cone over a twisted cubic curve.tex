@@ -1,0 +1,119 @@
+\documentclass{amsart}[12pt]
+
+\usepackage[cmtip,all]{xy}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath, amscd}
+\usepackage{mathrsfs}
+\usepackage{amssymb}
+\usepackage{mathtools}
+\usepackage{url}
+\usepackage[top=1.3in, bottom=1.3in, left=1.3in, right=1.3in]{geometry}
+\usepackage{pxfonts}
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usetikzlibrary{arrows,chains,matrix,positioning,scopes}
+\tikzset{join/.code=\tikzset{after node path={%
+\ifx\tikzchainprevious\pgfutil@empty\else(\tikzchainprevious)%
+edge[every join]#1(\tikzchaincurrent)\fi}}}
+\tikzset{>=stealth',every on chain/.append style={join},
+         every join/.style={->}}
+\usepackage{color}
+
+
+\DeclareMathOperator{\coker}{coker}
+\DeclareMathOperator{\im}{im}
+
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{cor}[theorem]{Corollary}
+\newtheorem{prop}[theorem]{Proposition}
+\theoremstyle{definition}
+\newtheorem{defn}[theorem]{Definition}
+\newtheorem{eg}[theorem]{Example}
+\newtheorem{ex}[theorem]{Exercise}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{obs}[theorem]{Observation}
+
+\theoremstyle{remark}
+\newtheorem{rmk}[theorem]{Remark}
+
+\numberwithin{equation}{section}
+
+%    Absolute value notation
+\newcommand{\abs}[1]{\lvert#1\rvert}
+\newcommand{\To}{\longrightarrow}
+
+
+% ----------------------------------------------------------------
+\begin{document}
+
+\title[The Hilbert scheme of points on the cone over a twisted cubic]{The Hilbert scheme of points on the cone over a twisted cubic}%
+%\author{Xudong Zheng}%
+\address{University of Illinois at Chicago, 851 South Morgan Street, Science and Engineering Offices m/c249, Chicago, IL 60607 USA}%
+\email{xzheng20@uic.edu}%
+
+\thanks{}%
+\subjclass{}%
+
+\keywords{}%
+
+\date{\today}%
+%\dedicatory{}%
+%\commby{}%
+% ----------------------------------------------------------------
+
+\maketitle
+
+\section{Set up}
+\begin{align*}
+S & = \mathbb{C}[x, y, z, w] \\
+I & = \langle xz - y^2, xw - yz, yw - z^2 \rangle = \textrm{ ideal of the cone over the twisted cubic curve}\\
+R & = S / I \\
+X & = \mathrm{Spec}(R) = \textrm{the cone}\\
+\end{align*}
+
+In \cite[Proposition 5.1]{8points}, Cartwright, Erman, Velasco, and Viray find a second irreducible component of $\mathrm{Hilb}^8(\mathbb{A}^4)$ of dimension at most 25 by computing the Zariski tangent space of $\mathrm{Hilb}^8(\mathbb{A}^4)$ at a closed point corresponding to a length $8$ subscheme that is defined by 7 quadratic forms in $\mathbb{A}^4$. Explicitly, let $Z$ be defined by 
+\[
+J = \langle x^2, xy y^2, z^2, zw, xw + yz \rangle,
+\]
+then the tangent space to the Hilbert scheme is $25$ dimensional.
+
+\section{Statement}
+
+\begin{prop}
+The Hilbert scheme $\mathrm{Hilb}^8(X)$ is reducible.
+\begin{proof}
+We modify the ideal in their example:
+\[
+J_0 = \langle x^2, xy, xz - y^2, xw - yz, yw - z^2, zw, w^2 \rangle.
+\]
+In particular, note that the scheme $Z = \mathrm{Spec}(S/J_0)$ still has length $8$ since $\langle x, y, z, w \rangle^3 \subset J_0$, and it is scheme-theoretically embedded in the singular surface $X$ since $I \subset J_0$.
+
+Now we compute the Zariski tangent space of $\mathrm{Hilb}^8(\mathbb{A}^4)$ at $[Z]$: choose a $\mathbb{C}$-linear space basis of $\mathcal{O}_Z$ as $\{1, x, y, z, w, xw, xz, yw\}$. Then an $S$-linear homomorphism $\phi: J_0 \to S/J_0$ can be represented by a table of the form
+\begin{center}
+      \begin{tabular}[b]{ c | c c c c c c c}
+    & $x^2$ & $xy$ & $xz - y^2$ & $xw - yz$ & $yw - z^2$ & $zw$ & $w^2$ \\ \hline
+    1 &  0 & 0 & 0 & 0 & 0 & 0 & 0  \\
+    $x$ & $b_2 + c_3$ & 0 & $c_1$ & 0 & 0 & $f_1$ & 0 \\
+    $y$ & $a_2$ & $b_2$ & $-c_3$ & $c_1 - 2c_3$ & 0 & $f_2$ & $f_1$ \\ 
+    $z$ & $a_3$ & $a_2$ & $c_3$ & 0 & $-2c_3$ & $f_3$ & $f_2$ \\
+    $w$ & 0 & $a_3$ & 0 & $-c_3$ & $c_3$ & $c_1 - 2c_3$ & $f_3$ \\
+    $xw$ & * & * & * & * & * & * & * \\
+    $xz$  & * & * & * & * & * & * & * \\
+    $yw$  & * & * & * & * & * & * & * \\
+  \end{tabular}
+\end{center}
+where the *'s and $a_2, b_2, a_3, c_1, c_3, f_1, f_2, f_3$ in the table can take arbitrary values. The total number of such free entries in the table counts the dimension $\dim T_{[Z]}\mathrm{Hilb}^8(\mathbb{A}^4) = 21 + 8 = 29 < 4 \times 8 = 32$. We conclude that the closed point $[Z]$ does not lie on the main component of $\mathrm{Hilb}^8(\mathbb{A}^4)$ (not even the intersection of the main component with other components). But $[Z] \in \mathrm{Hilb}^8(X)$ as a closed point, and if $\mathrm{Hilb}^8(X)$ were irreducible then $\mathrm{Hilb}^8(X)$ is contained in the main component of $\mathrm{Hilb}^8(\mathbb{A}^4)$. This shows that $\mathrm{Hilb}^8(X)$ is reducible.
+\end{proof}
+\end{prop}
+\bibliographystyle{amsalpha}
+\begin{thebibliography}{CEVV}
+\raggedright
+
+\bibitem[CEVV]{8points}
+D. Cartwright, D. Erman, M. Velasco, B. Viray. Hilbert schemes of 8 points, \textit{Algebra and Number Theory}, 3, 763-795, 2009.
+
+
+\end{thebibliography}
+\end{document}

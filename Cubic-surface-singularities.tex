@@ -1,0 +1,200 @@
+%\documentclass[12pt]{amsart}
+\documentclass[12pt,oneside,reqno]{amsart}
+\usepackage{amsmath}
+\usepackage[margin=1in]{geometry}
+\usepackage{tkz-euclide}
+\usepackage[cmtip,all]{xy}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{mathrsfs}
+\usepackage{amssymb}
+\usepackage{mathtools}
+\usepackage{stackengine}
+\usepackage{url}
+\usepackage{pxfonts}
+\usepackage{pgfplots}
+\usepackage{graphicx}
+\pgfplotsset{compat=1.8}
+\usepackage{url}
+\usepackage{tikz-cd}
+\parskip=15pt
+\parindent=0pt
+
+
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{cor}[theorem]{Corollary}
+\newtheorem{rmk}[theorem]{Remark}
+\newtheorem{prop}[theorem]{Proposition}
+\theoremstyle{definition}
+\newtheorem{defn}[theorem]{Definition}
+\newtheorem{eg}[theorem]{Example}
+\newtheorem{ex}[theorem]{Exercise}
+\newtheorem{fact}[theorem]{Fact}
+\newtheorem{ob}[theorem]{Observation}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{question}[theorem]{Question}
+\newtheorem{obs}[theorem]{Observation}
+\newtheorem{aside}[theorem]{Aside}
+\setcounter{MaxMatrixCols}{20}
+
+
+
+\pgfplotsset{soldot/.style={color=blue,only marks,mark=*}} \pgfplotsset{holdot/.style={color=blue,fill=white,only marks,mark=*}}
+\newcommand*\diff{\mathop{}\!\mathrm{d}}
+\newcommand*\Diff[1]{\mathop{}\!\mathrm{d^#1}}
+\newcommand\barbelow[1]{\stackunder[1.2pt]{$#1$}{\rule{.8ex}{.075ex}}}
+
+
+\begin{document}
+\title[Cubic surface singularities]{Hilbert scheme of points on cubic surface singularities}
+
+%\author{}
+
+\maketitle
+\date{\today}
+
+Let $X$ be a quasi-projective scheme, and $d$ be a positive integer. Denote $\mathrm{Hilb}^d(X)$ the Hilbert scheme of length $d$ subschemes of $X$. If $Z$ is a length $d$ subschemes, denote by $[Z]$ the closed point of $\mathrm{Hilb}^d(X)$ which represent $Z$ and $I_Z$ the ideal sheaf on $X$ defining $Z$. 
+
+\section{Iarrobino's calculation} 
+We briefly review the calculation of the dimensions of Hilbert function strata of the punctual Hilbert scheme of points on the plane due to Iarrobino (\cite[Theorem 2.12]{I77}). Denote by $R = \mathbb{C}\llbracket x, y \rrbracket$ the power series ring. For an ideal $I$ of $R$ of finite colength, the local Hilbert function of $R/I$ is the finite tuple of integers $T(I) = (t_0, t_1, \dots, t_j, \dots)$, where $t_j = \dim (\mathfrak{m}^j \setminus I \cap \mathfrak{m}^j) / \mathfrak{m}^{j + 1}$. The length of $R/I$ is $d = \sum_{i \geq 0}t_i$. If the multiplicity of $I$ is $e = \min_s I \subset \mathfrak{m}^s$, then $T(I)$ has the form $T(I) = (1, 2, \dots, e, t_e, t_{e + 1}, \dots)$ such that the ``tail'' $(e, t_e, t_{e + 1}, \dots)$ is a non-increasing and eventually zero sequence. Suppose $a_1, \dots, a_k$ are the degrees where $t_{a_i - 1} > t_{a_i}$, and denote by $e_i \coloneqq t_{a_i - 1} - t_{a_i}$ for any $i = 1, \dots, k$, and call it the \textit{$i$-th jumping coefficient}. In other words, the Hilbert function $h$ satisfies $t_e = t_{e + 1} = \dots = t_{a_1 - 1}, t_{a_1} = t_{a_1 + 1} = \dots = t_{a_2 - 1}, \dots, t_{a_k} = t_{a_k + 1} = \dots = t_n$. We choose the following monomial order on $R$:
+\[
+1 < y < x < y^2 < xy < x^2 < y^3 < xy^2 < x^2y < x^3 < \dots
+\]
+For any $f \in R$, the initial form of $f$ with respect to this monomial order, denoted by $in(f)$ is the smallest among the terms of $f$. Also, we display the monomials as follows:
+\[
+\begin{matrix} 
+& & & & y^4 & \dots & & \\
+& & & y^3 & y^3x & \dots & & \\
+& & y^2 & y^2x & y^2x^2 & \dots & &\\
+& y & yx & yx^2 & yx^3 & \dots & & \\
+1 & x & x^2 & x^3 & x^4 & \dots & &
+\end{matrix}
+\]
+For a local Hilbert function $h = (1, 2, \dots, e, t_{e}, \dots, t_n)$, its \textit{normal pattern} in the preceding presentation is the ``staircase'' determined by taking the lowest $t_i$ entries in the $i$-th column of the diagram, or equivalently, taking the largest $t_i$ monomials of degree $i - 1$ with respect to the preceding monomial order. For example, the local Hilbert function $(1, 2, 3, 2, 2, 1)$ gives rise to the staircase
+\[
+\begin{matrix}
+& & y^2 &  &  &  \\
+& y & yx & yx^2 & yx^3 &  \\
+1 & x & x^2 & x^3 & x^4 & x^5
+\end{matrix}
+\]
+Fix a local Hilbert function $h = (1, 2, \dots, e, t_{e}, \dots, t_n)$, and denote by $\mathrm{Hilb}^d_h(R)$ the locally closed subset of the punctual Hilbert scheme $\mathrm{Hilb}^d(R)$ with Hilbert function $h$. Iarrobino showed that $\mathrm{Hilb}^d_h(R)$ is irreducible and computed the dimension of $\mathrm{Hilb}^d_h(R)$ as follows. 
+
+Suppose $I \in \mathrm{Hilb}^d_h(R)$ is an ideal with Hilbert function $h$. Then there is a standard generating set of $I$ consisting of 
+\begin{align*}
+\textrm{initial degree } e
+& \begin{cases}
+y^e - u_1(x, y) \\
+y^{e - 1}x - u_2(x, y) \\
+\dots & \\
+y^{t_e}x^{e - t_e} - u_{e - t_e + 1}(x, y) \\
+\end{cases} \\
+\textrm{initial degree } a_1
+& \begin{cases}
+y^{t_e - 1}x^{a_1 - t_e + 1} - u_{e - t_e + 2}(x, y) \\
+\dots & \\
+y^{t_{a_1}}x^{a_1 - t_{a_1}} - u_{e + 1 - t_{a_1}}(x, y) \\
+\end{cases} \\
+\textrm{initial degree } a_2
+& \begin{cases}
+y^{t_{a_1} - 1}x^{a_2 - t_{a_1} + 1} - u_{e + 2 - t_{a_1}}(x, y) \\
+\dots & \\
+y^{t_{a_2}}x^{a_2 - t_{a_2}} - u_{e + 1 - t_{a_2}}(x, y) \\
+\end{cases} \\
+\dots & \\
+\textrm{initial degree } a_k
+& \begin{cases}
+y^{t_{a_{k - 1}} - 1}x^{a_k - t_{a_{k - 1}} + 1} - u_{e + 2 - t_{a_{k - 1}}}(x, y) \\
+\dots & \\
+y^{t_{a_k}}x^{a_k - t_{a_k}} - u_{e + 1 - t_{a_k}}(x, y) \\
+\end{cases} \\
+\mathfrak{m}^{n + 1} &
+\end{align*}
+where the initial degrees are labeled on the left, each $u_i(x, y)$ is a polynomials such that any term $v$ of $u_i(x, y)$ is contained in the staircase with degree at least the initial degree of the generator that contains it. Note that the standard generating set are listed so that the $y$-degree of their initial terms is decreasing. 
+
+\begin{theorem}\cite[Thm. 2.12]{I77}
+The dimension of the locally closed subset $\mathrm{Hilb}^d_h(R)$ is 
+\[
+\dim \mathrm{Hilb}^d_h(R) = d - \sum \dfrac{1}{2}e_j(e_j + 1).
+\]
+\end{theorem}
+
+The idea of the proof of the theorem is elementary. One first counts the total number of possible terms of all of the $u_i$ in the standard generating set. Then the syzygy relations among the initial terms of the standard generators will impose equations on the coefficients of the terms in $u_i$. The dimension of $\mathrm{Hilb}^d_h(R)$ will be the difference between the total number of terms in $u_i$ subtracting the total number of such equations. 
+
+\begin{eg}
+For the local Hilbert function $h = (1, 2, 3, 2, 2, 1)$. The standard generating set of an ideal $I$ with the prescribed Hilbert function consists of $y^3 - u_1(x, y), y^2x - u_2(x, y), yx^4 - u_3(x, y)$, together with $\mathfrak{m}^6$, where $u_1$ and $u_2$ are polynomials with their terms chosen from $yx^2, x^3, yx^3, x^4, x^5$, and $u_3$ is a multiple of $x^5$. Suppose $u_1 = a_1yx^2 + a_2x^3 + a_3yx^3 + a_4x^4 + a_5x^5, u_2 = b_1yx^2 + b_2x^3 + b_3yx^3 + b_4x^4 + b_5x^5$, and $u_3 = c_1x^5$. Note that there are $11$ coefficients in the generating set, which imposes an upper bound on the dimension of $\mathrm{Hilb}^d_h(R)$. A relation between the initial terms of the first two generators is
+\begin{align*}
+x \cdot (y^3 - u_1) - y \cdot (y^2x - u_2) & = yu_2 - xu_1  \\
+= y(b_1yx^2 + b_2x^3 + b_3yx^3 + b_4x^4 + b_5x^5) & - x(a_1yx^2 + a_2x^3 + a_3yx^3 + a_4x^4 + a_5x^5) \\
+= b_1y^2x^2 + (b_2 - a_1)yx^3 + b_3y^2x^3 & - a_2x^4 + (b_4 - a_3)yx^4 - a_4x^5 (\mod \mathfrak{m}^6)
+\end{align*}
+Since the left hand side of this relation lies in the ideal $I$, by expressing all of the terms that are outside the staircase in terms of those that are inside the staircase, the right hand side can be further reduced, after modulo $I$, as:
+\[
+(b_1^2 + b_2 - a_1)yx^3 + (b_1b_2 - a_2)x^4 + (2c_1b_1b_3 + b_1b_4 + b_2b_3 + c_1b_4 - c_1a_3 - a_4)x^5
+\]
+Note that the three terms above are all inside the staircase of the Hilbert function. Being an element of the ideal, all of the three terms must simultaneously vanish, which induce the following equations
+\begin{align*}
+a_1 & = b_1^2 + b_2 \\
+a_2 & = b_1b_2 \\
+a_4 & = 2c_1b_1b_3 + b_1b_4 + b_2b_3 + c_1b_4 - c_1a_3
+\end{align*}
+
+It turns out that these are all of the equations that the coefficients of the $u_i$ need to satisfy. Hence, $\dim \mathrm{Hilb}^d_h(R)$ in this case is equal to $11 - 3 = 8$. On the other hand, the colength of an ideal with Hilbert function $h$ is $11$, and there are three jumping coefficients $e_1 = e_2 = e_3 = 1$, and Iarrobino's theorem says that $\dim \mathrm{Hilb}^d_h(R) = 11 - \sum_{i = 1}^3\frac{1}{2}e_i(e_i + 1) = 11 - 3 = 8$.
+\end{eg}
+
+\begin{rmk}
+As this example illustrates, the point of this calculation is that any such equation among the coefficients of $u_i$ will involve a distinct linear term. These linear terms can be considered as the ``non-free'' coefficients. One can interpret the dimension counting as the elimination of these linear coefficients. In the example, $a_1, a_2$, and $a_4$ are the three ``non-free'' coefficients. The ``non-free'' coefficients could be counted as exactly the coefficients of the terms of $u_1$ which will remain inside the staircase after multiplied by $x$ (cf. \cite[Lemma 2.3]{I77}).
+\end{rmk}
+
+\section{Cubic surface singularity}
+In this section, we generalize Iarrobino's idea to the affine cone over a plane cubic curve. Suppose $F \in \mathbb{C}[x, y, z]$ is a general cubic polynomial, and let $X$ be the affine cone over the smooth plane cubic curve $(F = 0) \subset \mathbb{P}^2$. Denote by $R$ the complete local ring of $X$ at the vertex. First of all, it is easy to see that a sequence of positive integers is the local Hilbert function of some finite quotient algebra of $R$ is necessarily of the form $h = (1, 3, 6, 9, \dots, 3e - 3, t_e, t_{e + 1}, \dots, t_n)$, where $e$ is the multiplicity, and $3e - 3 \geq t_{e} \geq \dots \geq t_n$.
+
+\subsection{Monomial orders in $R$, staircases, normal forms}
+Without loss of generality, we transform $F$ into the Hesse normal form $x^3 + y^3 + z^3 - 3\psi xyz$ where $\psi$ is not a root of unity. The counterpart of the display of the staircases in the smooth surface case above is the following. First, we display the monomials of $\mathbb{C}\llbracket x, y, z \rrbracket$ as a lattice in $\mathbb{R}_{\geq 0}^3$. Using the Hesse normal form, $R$ can be identified as the $\mathbb{C}\llbracket x, y\rrbracket$-module $M = \mathbb{C}\llbracket x, y\rrbracket \oplus z \mathbb{C}\llbracket x, y\rrbracket \oplus z^2 \mathbb{C}\llbracket x, y\rrbracket$. The monomials of $M$ consists of those in the bottom three levels of those in $\mathbb{C}\llbracket x, y, z \rrbracket$. Denote by $R_d$ the degree $d$ homogeneous summand of $R$. Then the monomial basis of $R_d$ will be represented in a trapezoid shape
+\[
+\begin{matrix}
+& & x^{d - 2}z^2 & & x^{d - 3}yz^2 & & \dots & & y^{d - 2}z^2 & & \\
+& & & & & & & & & & \\
+& x^{d - 1}z & &  x^{d - 2}yz & & \dots & & xy^{d - 2}z & & y^{d - 1}z & \\
+& & & & & & & & & & \\
+x^d & & x^{d - 1}y & & x^{d - 2}y^2 & & \dots & &  y^{d - 1}x & & y^d
+\end{matrix}
+\]
+We declare the following monomial order on $R$:
+\begin{align*}
+& 1 < y < z < x < y^2 < yz < z^2 < xy < xz < x^2 < \\
+& y^3 < y^2z < yz^2 < xy^2 < xyz < xz^2 < x^2y < x^2z < x^3 < \dots
+\end{align*}
+Namely, for any monomials $P$ and $Q$, $P < Q$ if (1) $\deg P < \deg Q$; (2) $\deg P = \deg Q$ and $\deg_x P < \deg_x Q$; or (3) $\deg P = \deg Q$, $\deg_x P = \deg_x Q$, and $\deg_z P < \deg_z Q$. Here for a monomial $M$, the degree of $x$ (resp. $y$ or $z$) in $M$ is denoted by $\deg_x M$ (resp. $\deg_y M$ or $\deg_z M$).
+
+With respect to the monomial order, a standard generating set for any ideal of $R$ can be obtained in the same way as in the case of the smooth surface. 
+
+Consider the local Hilbert function $h = (1, 3, 6, 9, 12, 15, 15, 12, 9, 6, 3)$ with length $d = 91$. The initial terms of the standard generating set consists of
+\begin{align*}
+& y^6, y^5z, y^4z^2 \\
+& x^2y^5, x^2y^4z, x^2y^3z^2 \\
+& x^4y^4, x^4y^3z, x^4y^2z^2 \\
+& x^6y^3, x^6y^2z, x^6yz^2 \\
+& x^8y^2, x^8yz, x^8z^2 \\
+& \mathfrak{m}^{11}
+\end{align*}
+
+% ----------------------------------------------------------------
+\bibliographystyle{amsalpha}
+\begin{thebibliography}{ABCD}
+
+
+\bibitem[I77]{I77}
+Iarrobino, A. (1977), \textit{Punctual Hilbert schemes}. Mem. Amer. Math. Soc. 10, no. 188, viii+112 pp.
+
+
+
+
+
+
+
+\end{thebibliography}
+
+\end{document}
